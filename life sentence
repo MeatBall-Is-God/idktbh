@@ -197,14 +197,48 @@ pcall(function()
     end
     
     _G.killaurarange = 5
+    _G.teleportforwardrange = 5
     _G.adeadsum = false
 end)
 
+--- this was straight up taken from justezpis gui im sorry but this script is meant to be a less laggier remake
+
+--// Services \\--
 local Players = game:GetService("Players")
 local Workspace = game:GetService("Workspace")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local MarketplaceService = game:GetService("MarketplaceService")
+local GroupService = game:GetService("GroupService") 
+local RunService = game:GetService("RunService")
+local Lighting = game:GetService("Lighting")
+
+--// Variables \\--
 local Player = Players.LocalPlayer
 local Mouse = Player:GetMouse()
 local Camera = Workspace.CurrentCamera
+local Rocks = Workspace:WaitForChild("MiningRocks")
+local Robbable = Workspace:WaitForChild("Robbable")
+local TP_Part = Workspace:WaitForChild("SecurityStuffIDK"):WaitForChild("TeleBackPart")
+local LootSpawns = Workspace:WaitForChild("LootSpawns")
+local PlayerStats = ReplicatedStorage:WaitForChild("PlayerStats")
+local Local_PlayerStats = PlayerStats:WaitForChild(Player.Name)
+local Buttons = Workspace:WaitForChild("Buttons")
+
+--// Anti-Mod \\--
+local PlaceInfo = MarketplaceService:GetProductInfo(game.PlaceId)
+local Group_ID = PlaceInfo.Creator.CreatorTargetId
+local Roles = GroupService:GetGroupInfoAsync(Group_ID).Roles
+local Ranks = {}
+Ranks.Guest = 0
+for Name, Rank in next, Roles do
+    Ranks[Name] = Rank
+end
+function ModCheck(A_1)
+    local Rank = Ranks[A_1:GetRoleInGroup(Group_ID)]
+    if Rank and Rank > 2 then 
+        Player:Kick("Mod " .. A_1.Name .. " joined your game.")
+    end
+end
 
 function SilentAimTarget()
     local Closest = false
@@ -314,7 +348,7 @@ Farm:AddToggle({
                         task.wait(0.2)
                         game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
                         fireproximityprompt(v.Door.Attachment.ProximityPrompt, 4, false)
-                        task.wait(0.2)
+                        task.wait(0.4)
                         for i,v in pairs(workspace:GetChildren()) do
                             if v.Name == "DroppedCash" then
                                 fireproximityprompt(v.ProximityPrompt)
@@ -349,7 +383,7 @@ Farm:AddButton({
                     task.wait(0.2)
                     game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
                     fireproximityprompt(v.Door.Attachment.ProximityPrompt, 4, false)
-                    task.wait(0.2)
+                    task.wait(0.4)
                     for i,v in pairs(workspace:GetChildren()) do
                         if v.Name == "DroppedCash" then
                             fireproximityprompt(v.ProximityPrompt)
@@ -605,6 +639,28 @@ Toggles:AddToggle({
 })
 
 Toggles:AddToggle({
+    Name = "Anti Fag Mods",
+    Default = false,
+    Callback = function(afmods)
+            if afmods then
+               _G.antifagmods = true
+               notify("Life Sentence Fucker","Anti Fag Mods On")
+            else
+                _G.antifagmods = false
+                notify("Life Sentence Fucker","Anti Fag Mods Off")
+            end   
+        while _G.antifagmods do task.wait(0.4)
+             pcall(function()
+             for _, A_1 in next, Players:GetPlayers() do
+                ModCheck(A_1)
+                task.wait(0.25)
+            end
+            end)
+        end
+    end
+})
+
+Toggles:AddToggle({
     Name = "No Melee Slow",
     Default = false,
     Callback = function(nslow)
@@ -618,7 +674,9 @@ Toggles:AddToggle({
         while _G.noslow do task.wait()
             pcall(function()
                 if game:GetService("Players").LocalPlayer.Backpack.Stats.MeleeDelay.Value == true then
-                    repeat task.wait() game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = _G.originspeed until game:GetService("Players").LocalPlayer.Backpack.Stats.MeleeDelay.Value == false
+                    if _G.originspeed > 6 then
+                        repeat task.wait() game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = _G.originspeed until game:GetService("Players").LocalPlayer.Backpack.Stats.MeleeDelay.Value == false
+                    end
                 else
                     _G.originspeed = game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed
                 end    
@@ -632,16 +690,18 @@ Toggles:AddToggle({
     Default = false,
     Callback = function(ngslow)
             if ngslow then
-               _G.noslow = true
+               _G.noslow2 = true
                notify("Life Sentence Fucker","No Gun On")
             else
-                _G.noslow = false
+                _G.noslow2 = false
                 notify("Life Sentence Fucker","No Gun Off")
             end   
-        while _G.noslow do task.wait()
+        while _G.noslow2 do task.wait()
             pcall(function()
                 if game:GetService("Players").LocalPlayer.Backpack.Stats.CanReload.Value == false or game:GetService("Players").LocalPlayer.Backpack.Stats.CanFire.Value == false then
-                    repeat task.wait() game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = _G.originspeed2 until game:GetService("Players").LocalPlayer.Backpack.Stats.CanReload.Value == true or game:GetService("Players").LocalPlayer.Backpack.Stats.CanFire.Value == true
+                    if _G.originspeed2 > 6 then
+                        repeat task.wait() game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = _G.originspeed2 until game:GetService("Players").LocalPlayer.Backpack.Stats.CanReload.Value == true or game:GetService("Players").LocalPlayer.Backpack.Stats.CanFire.Value == true
+                    end
                 else
                     _G.originspeed2 = game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed
                 end    
@@ -649,7 +709,6 @@ Toggles:AddToggle({
         end
     end
 })
-
 
 Toggles:AddToggle({
     Name = "Auto Reload FireArm",
@@ -691,6 +750,36 @@ Toggles:AddToggle({
         end
     end
 })
+
+
+Toggles:AddToggle({
+    Name = "Kill Say",
+    Default = false,
+    Callback = function(ksay)
+        if ksay then
+            _G.killsay = true
+            notify("Life Sentence Fucker","Kill Say On")
+        else
+            _G.killsay = false
+            notify("Life Sentence Fucker","Kill Say Off")
+        end
+    end
+})
+
+local Value = game:GetService("Players").LocalPlayer.leaderstats.Bounty
+local thing
+thing = Value.Changed:Connect(function()
+if _G.killsay then
+local killsaywords = {
+    "🤓🤓🤓Imagine dying💀💀💀 to me🤣🤣🤣",
+    "💀💀💀Bro got KOed🤣🤣🤣",
+    "🤓🤓🤓Another kill🤣🤣🤣 to my killstreak😃😃😃",
+    "🤣🤣🤣How do i change my difficulty🤓🤓🤓i feel like im on the child difficulty💀💀💀"
+}
+
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(killsaywords[math.random(#killsaywords)], "All")
+end
+end)  
 
 Toggles:AddToggle({
     Name = "Anti Illegal Room",
@@ -800,6 +889,30 @@ Toggles:AddBind({
     else
     notify("Life Sentence Fucker","Equip A Fire Arm First!")
     end
+	end    
+})
+
+Toggles:AddBind({
+	Name = "Teleport Forward",
+	Default = Enum.KeyCode.F,
+	Hold = false,
+	Callback = function()
+    if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame *= CFrame.new(0, 0, -5)
+    end
+    end
+})
+
+Toggles:AddSlider({
+	Name = "Teleport Forward Range",
+	Min = 1,
+	Max = 15,
+	Default = 5,
+	Color = Color3.fromRGB(200,200,200),
+	Increment = 0.1,
+	ValueName = "Range",
+	Callback = function(tpforwardrange)
+		_G.teleportforwardrange = tonumber(tpforwardrange)
 	end    
 })
 

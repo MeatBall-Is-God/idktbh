@@ -1,0 +1,902 @@
+local MAKER = "RandomHaxer2"
+local Confirm = Instance.new("ScreenGui")
+local Frame = Instance.new("Frame")
+local shadowHolder = Instance.new("Frame")
+local umbraShadow = Instance.new("ImageLabel")
+local penumbraShadow = Instance.new("ImageLabel")
+local ambientShadow = Instance.new("ImageLabel")
+local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+local Frame_2 = Instance.new("Frame")
+local TextLabel = Instance.new("TextLabel")
+local TextLabel_2 = Instance.new("TextLabel")
+local TextLabel_3 = Instance.new("TextLabel")
+local Poster = Instance.new("TextLabel")
+local TextLabel_4 = Instance.new("TextLabel")
+local UICorner = Instance.new("UICorner")
+local TextButton = Instance.new("TextButton")
+local UIAspectRatioConstraint_2 = Instance.new("UIAspectRatioConstraint")
+local UICorner_2 = Instance.new("UICorner")
+local UIAspectRatioConstraint_3 = Instance.new("UIAspectRatioConstraint")
+
+--Properties:
+
+Confirm.Name = "Confirm"
+
+
+Frame.Parent = Confirm
+Frame.BackgroundColor3 = Color3.fromRGB(63, 63, 63)
+Frame.Position = UDim2.new(0.297427654, 0, 0.301818192, 0)
+Frame.Size = UDim2.new(0, 503, 0, 326)
+Frame.ZIndex = 3
+
+shadowHolder.Name = "shadowHolder"
+shadowHolder.Parent = Frame
+shadowHolder.BackgroundTransparency = 1.000
+shadowHolder.Position = UDim2.new(0.00596421491, 0, 0, 0)
+shadowHolder.Size = UDim2.new(0.99403578, 0, 0.93865031, 0)
+
+umbraShadow.Name = "umbraShadow"
+umbraShadow.Parent = shadowHolder
+umbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+umbraShadow.BackgroundTransparency = 1.000
+umbraShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+umbraShadow.Size = UDim2.new(1, 4, 1, 4)
+umbraShadow.Image = "rbxassetid://1316045217"
+umbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+umbraShadow.ImageTransparency = 0.860
+umbraShadow.ScaleType = Enum.ScaleType.Slice
+umbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+penumbraShadow.Name = "penumbraShadow"
+penumbraShadow.Parent = shadowHolder
+penumbraShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+penumbraShadow.BackgroundTransparency = 1.000
+penumbraShadow.Position = UDim2.new(0.5, 0, 0.5, 2)
+penumbraShadow.Size = UDim2.new(1, 4, 1, 4)
+penumbraShadow.Image = "rbxassetid://1316045217"
+penumbraShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+penumbraShadow.ImageTransparency = 0.880
+penumbraShadow.ScaleType = Enum.ScaleType.Slice
+penumbraShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+ambientShadow.Name = "ambientShadow"
+ambientShadow.Parent = shadowHolder
+ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
+ambientShadow.BackgroundTransparency = 1.000
+ambientShadow.Position = UDim2.new(0.464214712, 0, 0.607361972, 2)
+ambientShadow.Size = UDim2.new(1, 4, 1, 4)
+ambientShadow.Image = "rbxassetid://1316045217"
+ambientShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
+ambientShadow.ImageTransparency = 0.880
+ambientShadow.ScaleType = Enum.ScaleType.Slice
+ambientShadow.SliceCenter = Rect.new(10, 10, 118, 118)
+
+UIAspectRatioConstraint.Parent = shadowHolder
+UIAspectRatioConstraint.AspectRatio = 1.634
+
+Frame_2.Parent = Frame
+Frame_2.BackgroundColor3 = Color3.fromRGB(17, 17, 17)
+Frame_2.Position = UDim2.new(0.0139165008, 0, 0.0214723926, 0)
+Frame_2.Size = UDim2.new(0, 488, 0, 313)
+Frame_2.ZIndex = 4
+
+TextLabel.Parent = Frame_2
+TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.BackgroundTransparency = 1.000
+TextLabel.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.Position = UDim2.new(0.163114861, 0, 0.0935423076, 0)
+TextLabel.Size = UDim2.new(0, 324, 0, 53)
+TextLabel.ZIndex = 5
+TextLabel.Font = Enum.Font.Ubuntu
+TextLabel.Text = "By using this script you accept:"
+TextLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel.TextScaled = true
+TextLabel.TextSize = 14.000
+TextLabel.TextWrapped = true
+
+TextLabel_2.Parent = Frame_2
+TextLabel_2.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.BackgroundTransparency = 1.000
+TextLabel_2.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.Position = UDim2.new(0.163114861, 0, 0.295267314, 0)
+TextLabel_2.Size = UDim2.new(0, 324, 0, 19)
+TextLabel_2.ZIndex = 5
+TextLabel_2.Font = Enum.Font.Ubuntu
+TextLabel_2.Text = "1. You will not linkvertise this"
+TextLabel_2.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_2.TextScaled = true
+TextLabel_2.TextSize = 14.000
+TextLabel_2.TextWrapped = true
+TextLabel_2.TextXAlignment = Enum.TextXAlignment.Left
+
+TextLabel_3.Parent = Frame_2
+TextLabel_3.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.BackgroundTransparency = 1.000
+TextLabel_3.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.Position = UDim2.new(0.163114876, 0, 0.379273832, 0)
+TextLabel_3.Size = UDim2.new(0, 324, 0, 19)
+TextLabel_3.ZIndex = 5
+TextLabel_3.Font = Enum.Font.Ubuntu
+TextLabel_3.Text = "2. You will not redistribute for profit"
+TextLabel_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_3.TextScaled = true
+TextLabel_3.TextSize = 14.000
+TextLabel_3.TextWrapped = true
+TextLabel_3.TextXAlignment = Enum.TextXAlignment.Left
+
+Poster.Name = "Poster"
+Poster.Parent = Frame_2
+Poster.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+Poster.BackgroundTransparency = 1.000
+Poster.BorderColor3 = Color3.fromRGB(255, 255, 255)
+Poster.Position = UDim2.new(0.163114861, 0, 0.469019085, 0)
+Poster.Size = UDim2.new(0, 324, 0, 19)
+Poster.ZIndex = 5
+Poster.Font = Enum.Font.Ubuntu
+Poster.Text = "3. You know this script is made by " .. MAKER
+Poster.TextColor3 = Color3.fromRGB(255, 255, 255)
+Poster.TextScaled = true
+Poster.TextSize = 14.000
+Poster.TextWrapped = true
+Poster.TextXAlignment = Enum.TextXAlignment.Left
+
+TextLabel_4.Parent = Frame_2
+TextLabel_4.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.BackgroundTransparency = 1.000
+TextLabel_4.BorderColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.Position = UDim2.new(0.163114861, 0, 0.548588932, 0)
+TextLabel_4.Size = UDim2.new(0, 339, 0, 19)
+TextLabel_4.ZIndex = 5
+TextLabel_4.Font = Enum.Font.Ubuntu
+TextLabel_4.Text = "4. You will not snitch or reverse engineer this gui"
+TextLabel_4.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextLabel_4.TextScaled = true
+TextLabel_4.TextSize = 14.000
+TextLabel_4.TextWrapped = true
+TextLabel_4.TextXAlignment = Enum.TextXAlignment.Left
+
+UICorner.CornerRadius = UDim.new(0.0399999991, 0)
+UICorner.Parent = Frame_2
+
+TextButton.Parent = Frame_2
+TextButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.Position = UDim2.new(0.288934439, 0, 0.760383368, 0)
+TextButton.Size = UDim2.new(0, 200, 0, 50)
+TextButton.ZIndex = 7
+TextButton.Style = Enum.ButtonStyle.RobloxButton
+TextButton.Font = Enum.Font.Ubuntu
+TextButton.Text = "I Agree"
+TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextButton.TextSize = 14.000
+
+UIAspectRatioConstraint_2.Parent = Frame_2
+UIAspectRatioConstraint_2.AspectRatio = 1.559
+
+UICorner_2.CornerRadius = UDim.new(0.0399999991, 0)
+UICorner_2.Parent = Frame
+
+UIAspectRatioConstraint_3.Parent = Frame
+UIAspectRatioConstraint_3.AspectRatio = 1.543
+
+if syn then
+    syn.protect_gui(Confirm)
+end
+
+Confirm.Parent = game:GetService("CoreGui")
+
+TextButton.MouseButton1Click:Connect(function()
+    Confirm:Destroy()
+    
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+pcall(function()
+    for i,garbage in pairs(getgc()) do
+        if type(garbage) == "function" and getinfo(garbage).name == "AddStamina" and getfenv(garbage).script == game:GetService("Players").LocalPlayer.Backpack.Local.CombatMain then
+            _G.stamfunction = garbage
+        end    
+    end
+    
+    _G.killaurarange = 5
+    _G.adeadsum = false
+end)
+
+local Players = game:GetService("Players")
+local Workspace = game:GetService("Workspace")
+local Player = Players.LocalPlayer
+local Mouse = Player:GetMouse()
+local Camera = Workspace.CurrentCamera
+
+function SilentAimTarget()
+    local Closest = false
+    local Distance = 400
+    local MousePos = Vector2.new(Mouse.X, Mouse.Y)
+    for _, A_1 in next, Players.GetPlayers(Players) do
+        local Char = A_1.Character
+        local Hum = Char and Char.FindFirstChild(Char, "Humanoid")
+        if A_1 ~= Player and Hum and Hum.Health > 0 and Char.FindFirstChild(Char, "Head") and not Char.FindFirstChild(Char, "ForceField") then
+            local vector, onScreen = Camera.WorldToScreenPoint(Camera, Char.Head.Position)
+            if onScreen then
+                local NewDistance = (MousePos - Vector2.new(vector.X, vector.Y)).Magnitude
+                if NewDistance < Distance then
+                    Distance = NewDistance
+                    Closest = Char.Head
+                end
+            end
+        end
+    end
+    return Closest
+end
+
+function GetTarget()
+    -- Variables
+    local Distance = _G.killaurarange
+    local Closest = false
+    local Cop = game:GetService("ReplicatedStorage").PlayerStats:FindFirstChild(game.Players.LocalPlayer.Character.Name).Cop.Value
+    -- Go Through Players
+    for _, A_1 in next, game.Players:GetPlayers() do
+        local Char = A_1.Character
+        -- Player Check
+        if Char and A_1 ~= game.Players.LocalPlayer and Char:FindFirstChild("Head") and Char:FindFirstChild("Humanoid") and Char.Humanoid.Health > 0 and not Char:FindFirstChild("ForceField") then
+            -- Team Check
+            local Data = game:GetService("ReplicatedStorage").PlayerStats:FindFirstChild(A_1.Name)
+            if Data and Data:FindFirstChild("Cop") and (Cop == false or Data.Cop.Value == false) then
+                -- Distance Check
+                local New_Distance = game.Players.LocalPlayer:DistanceFromCharacter(Char.Head.Position)
+                if New_Distance < Distance then
+                    Distance = New_Distance
+                    Closest = Char.Head
+                end
+            end
+        end
+    end
+    return Closest
+end
+
+function touch(A_1, A_2)
+    pcall(function()
+        firetouchinterest(A_1, A_2, 0)
+        firetouchinterest(A_1, A_2, 1)
+    end)
+end
+
+local W1 = OrionLib:MakeWindow({Name = "Life Sentence Fucker", HidePremium = false, SaveConfig = false, ConfigFolder = "Life Sentence Fucker"})
+
+OrionLib:MakeNotification({
+    Name = "Life Sentence Fucker",
+    Content = "UseLess Person#7247",
+    Image = "rbxassetid://6890648157", --- rbxassetid://4483345998
+    Time = 5
+})
+
+function notify(name,text)
+    OrionLib:MakeNotification({
+    Name = name,
+    Content = text,
+    Image = "rbxassetid://6890648157", --- rbxassetid://4483345998
+    Time = 5
+})
+
+end
+
+local Toggles = W1:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://6890648157", --- rbxassetid://4483345998
+    PremiumOnly = false
+})
+
+local Farm = W1:MakeTab({
+    Name = "Farming",
+    Icon = "rbxassetid://6890648157", --- rbxassetid://4483345998
+    PremiumOnly = false
+})
+
+Farm:AddToggle({
+    Name = "Auto Farm Safe/Register",
+    Default = false,
+    Callback = function(asafe)
+        spawn(function()
+            if asafe then
+                _G.autofarmsafes = true
+                notify("Life Sentence Fucker","Auto Farm Safe/Register On")
+            else
+                _G.autofarmsafes = false
+                notify("Life Sentence Fucker","Auto Farm Safe/Register Off")
+            end
+            while _G.autofarmsafes do task.wait(0.1)
+                if not _G.scrap and not _G.adeadsum then
+                _G.rob = true    
+                for i,v in pairs(game.Workspace.Robbable:GetDescendants()) do
+                    local orginalposition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                    if v.Name == "Safe" or v.Name == "Register" then
+                        if v.Door.Attachment.ProximityPrompt.Enabled == true then
+                        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Door.Position)
+                        task.wait(0.2)
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                        fireproximityprompt(v.Door.Attachment.ProximityPrompt, 4, false)
+                        task.wait(0.2)
+                        for i,v in pairs(workspace:GetChildren()) do
+                            if v.Name == "DroppedCash" then
+                                fireproximityprompt(v.ProximityPrompt)
+                            end
+                        end
+                        task.wait(0.4)
+                        game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(orginalposition)
+                        task.wait(0.2)
+                        end
+                    end
+                end
+                _G.rob = false
+                end
+            end    
+        end)
+    end
+})
+
+Farm:AddButton({
+    Name = "Farm Safe/Register",
+    Callback = function()
+            if not _G.scrap and not _G.adeadsum then
+            _G.rob = true    
+            for i,v in pairs(game.Workspace.Robbable:GetDescendants()) do
+                    local orginalposition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                if v.Name == "Safe" or v.Name == "Register" then
+                    if v.Door.Attachment.ProximityPrompt.Enabled == true then
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Door.Position)
+                    task.wait(0.2)
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                    fireproximityprompt(v.Door.Attachment.ProximityPrompt, 4, false)
+                    task.wait(0.2)
+                    for i,v in pairs(workspace:GetChildren()) do
+                        if v.Name == "DroppedCash" then
+                            fireproximityprompt(v.ProximityPrompt)
+                        end
+                    end
+                    task.wait(0.4)
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(orginalposition)
+                    task.wait(0.2)
+                end
+            end
+            end
+            _G.rob = false  
+        end
+    end
+})
+
+Farm:AddToggle({
+    Name = "Auto Collect All Scrap",
+    Default = false,   
+    Callback = function(ascrap)
+        spawn(function()
+            if ascrap then
+                _G.autocollectscrap = true
+                notify("Transfurify Fucker","Auto Collect All Scrap On")
+            else
+                _G.autocollectscrap = false
+                notify("Transfurify Fucker","Auto Collect All Scrap Off")
+            end    
+            while _G.autocollectscrap do task.wait(0.1)
+                if not _G.rob and not _G.adeadsum then
+                _G.scrap = true
+                for i,v in pairs(game:GetService("Workspace").LootSpawns:GetDescendants()) do
+                    if v.Name == "Part" then
+                        if v:FindFirstChild("Attachment") then
+                            if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt") then
+                               if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt").Enabled == true then
+                                   task.wait(0.1)
+                                   local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                                   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+                                   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+                                   task.wait(0.3)
+                                   game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                                   fireproximityprompt(v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt"))
+                                   task.wait(0.3)
+                                   game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+                                   game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false                           
+                                   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
+                               end
+                            end
+                        end
+                    end
+                end
+                _G.scrap = false
+                end
+            end
+        end)
+    end    
+})
+
+Farm:AddButton({
+    Name = "Collect All Scrap",
+    Callback = function()
+        if not _G.rob and not _G.adeadsum then
+        _G.scrap = true    
+        for i,v in pairs(game:GetService("Workspace").LootSpawns:GetDescendants()) do
+            if v.Name == "Part" then
+                if v:FindFirstChild("Attachment") then
+                    if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt") then
+                       if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt").Enabled == true then
+                           task.wait(0.1)
+                           local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                           game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
+                           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+                           task.wait(0.3)
+                           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                           fireproximityprompt(v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt"))
+                           task.wait(0.3)
+                           game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+                           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false                           
+                           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
+                       end
+                    end
+                end
+            end
+        end
+        _G.scrap = false
+        end
+    end
+})
+
+Toggles:AddToggle({
+    Name = "Anti Death",
+    Default = false,
+    Callback = function(adead)
+        spawn(function()
+            if adead then
+                _G.antideath = true
+                notify("Life Sentence Fucker","Anti Death On")
+            else
+                _G.antideath = false
+                notify("Life Sentence Fucker","Anti Death Off")
+            end
+            while _G.antideath do task.wait()
+   --pcall(function()
+    if game:GetService("Players").LocalPlayer.Backpack.Stats.RagDolled.Value == true or game:GetService("Players").LocalPlayer.Backpack.Stats.Downed.Value == true then
+        if _G.customantideathpos then
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
+        _G.antideath = false
+        _G.adeadsum = true
+        repeat task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
+        until game:GetService("Players").LocalPlayer.Backpack.Stats.Downed.Value == false
+        local randompos = math.random(1,3)
+        if randompos == 1 then
+        for cracker = 0,35 do
+        task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8.68285, 4.26315, -46.2956)
+        end
+        elseif randompos == 2 then
+        for cracker2 = 0,35 do
+        task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-106.787, 4.96343, -82.6467)
+        end
+        elseif randompos == 3 then
+        for cracker3 = 0,35 do
+        task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(142.844, 4.96343, -100.531)
+        end
+        end
+        _G.antideath = true
+        _G.adeadsum = false
+        else
+        
+        _G.antideath = false
+        _G.adeadsum = true
+        local originalposition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
+        repeat task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
+        until game:GetService("Players").LocalPlayer.Backpack.Stats.Downed.Value == false
+        wait(0.3)
+        for cracker = 0,35 do
+        task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalposition)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalposition)
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalposition)
+        end
+        task.wait()
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalposition)
+        _G.antideath = true
+        _G.adeadsum = false
+        end
+end
+    --end)
+end
+        end)
+    end
+})
+
+Toggles:AddToggle({
+    Name = "Anti Death Random Position",
+    Default = false,
+    Callback = function(adeadc)
+        spawn(function()
+            if adeadc then
+               _G.customantideathpos = true
+               notify("Life Sentence Fucker","Anti Death Random Position On")
+            else
+                _G.customantideathpos = false
+                notify("Life Sentence Fucker","Anti Death Random Position Off")
+            end    
+        end)
+    end
+})
+
+Toggles:AddToggle({
+    Name = "Silent Aim",
+    Default = false,
+    Callback = function(silent)
+        spawn(function()
+            if silent then
+               _G.silentaim = true
+               notify("Life Sentence Fucker","Silent Aim On")
+            else
+                _G.silentaim = false
+                notify("Life Sentence Fucker","Silent Aim Off")
+            end    
+        end)
+    end
+})
+
+if not _G.allreadysilentaimnamecall then
+_G.allreadysilentaimnamecall = true
+
+local OldNameCall = nil
+OldNameCall = hookmetamethod(game, "__namecall", function(Self, ...)
+    local Args = {...}
+    local NamecallMethod = getnamecallmethod()
+    if NamecallMethod == "FireServer" and Args[1] == "Fire" and _G.silentaim and typeof(Args[2]) == "table" and typeof(Args[2][2]) == "Instance" then
+        local Target = SilentAimTarget()
+        if Target ~= false then
+            for _, A_1 in next, Args[2] do
+                if typeof(A_1) == "Instance" then
+                    Args[2][_] = Target
+                end
+            end
+        end
+    end
+    return OldNameCall(Self, unpack(Args))
+end)
+
+else
+end
+
+Toggles:AddToggle({
+    Name = "Vape",
+    Default = false,
+    Callback = function(vap)
+            if vap then
+               _G.vape = true
+               notify("Life Sentence Fucker","Vape On")
+            else
+                _G.vape = false
+                notify("Life Sentence Fucker","Vape Off")
+            end   
+        while _G.vape do task.wait(0.5)
+            pcall(function()
+                game:GetService("ReplicatedStorage").Events.SnowBreath:FireServer("SnowBreath")
+            end)
+        end
+    end
+})
+
+Toggles:AddToggle({
+    Name = "Auto Request Cafeteria Meal",
+    Default = false,
+    Callback = function(ameal)
+            if ameal then
+               _G.autoreqmeal = true
+               notify("Life Sentence Fucker","Auto Request Meal On")
+            else
+                _G.autoreqmeal = false
+                notify("Life Sentence Fucker","Auto Request Meal Off")
+            end   
+        while _G.autoreqmeal do task.wait(0.2)
+            pcall(function()
+                game:GetService("ReplicatedStorage").Events.CafeteriaEvent:FireServer("RequestMeal")
+            end)
+        end
+    end
+})
+
+Toggles:AddToggle({
+    Name = "No Melee Slow",
+    Default = false,
+    Callback = function(nslow)
+            if nslow then
+               _G.noslow = true
+               notify("Life Sentence Fucker","No Slow On")
+            else
+                _G.noslow = false
+                notify("Life Sentence Fucker","No Slow Off")
+            end   
+        while _G.noslow do task.wait()
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.Backpack.Stats.MeleeDelay.Value == true then
+                    repeat task.wait() game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = _G.originspeed until game:GetService("Players").LocalPlayer.Backpack.Stats.MeleeDelay.Value == false
+                else
+                    _G.originspeed = game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed
+                end    
+            end)
+        end
+    end
+})
+
+Toggles:AddToggle({
+    Name = "No Gun Slow",
+    Default = false,
+    Callback = function(ngslow)
+            if ngslow then
+               _G.noslow = true
+               notify("Life Sentence Fucker","No Gun On")
+            else
+                _G.noslow = false
+                notify("Life Sentence Fucker","No Gun Off")
+            end   
+        while _G.noslow do task.wait()
+            pcall(function()
+                if game:GetService("Players").LocalPlayer.Backpack.Stats.CanReload.Value == false or game:GetService("Players").LocalPlayer.Backpack.Stats.CanFire.Value == false then
+                    repeat task.wait() game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = _G.originspeed2 until game:GetService("Players").LocalPlayer.Backpack.Stats.CanReload.Value == true or game:GetService("Players").LocalPlayer.Backpack.Stats.CanFire.Value == true
+                else
+                    _G.originspeed2 = game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed
+                end    
+            end)
+        end
+    end
+})
+
+
+Toggles:AddToggle({
+    Name = "Auto Reload FireArm",
+    Default = false,
+    Callback = function(areload)
+            if areload then
+                if not _G.autoreloadfirsttime then
+                    _G.autoreloadfirsttime = true
+                    local newmsg = Instance.new("Message",workspace)
+                    newmsg.Text = "This will only reload the firearm that u have equipped when it reaches 0 ammo!"
+                    task.wait(6)
+                    newmsg:Destroy()
+                end
+               _G.autoreload = true
+               notify("Life Sentence Fucker","Auto Reload On")
+            else
+                _G.autoreload = false
+                notify("Life Sentence Fucker","Auto Reload Off")
+            end   
+        while _G.autoreload do task.wait(0.1)
+            pcall(function()
+                if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool") then
+                    if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Clip") then
+                        clip = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Clip").Value
+                    end
+                end
+                
+                if clip == 0 then
+                    if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool") then
+                        if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Reserve") then
+                            reserve = game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Reserve").Value
+                        end
+                    end
+                    if reserve > 0 then
+                        game:GetService("ReplicatedStorage").Events.WeaponEvent:FireServer("Reload")
+                    end    
+                end
+            end)
+        end
+    end
+})
+
+Toggles:AddToggle({
+    Name = "Anti Illegal Room",
+    Default = false,
+    Callback = function(aillegalroom)
+        spawn(function()
+            if aillegalroom then
+               _G.antiillegalroom = true
+               notify("Life Sentence Fucker","Anti Illegal Room On")
+            else
+                _G.antiillegalroom = false
+                notify("Life Sentence Fucker","Anti Illegal Room Off")
+            end    
+        end)
+    end
+})
+
+if not _G.allreadyantiillegalroomcopevent then
+_G.allreadyantiillegalroomcopevent = true
+
+local mt = getrawmetatable(game)
+make_writeable(mt)
+
+local namecall = mt.__namecall
+mt.__namecall = newcclosure(function(self, ...)
+    local method = getnamecallmethod()
+    local args = {...}
+
+    if method == "FireServer" and tostring(self) == "CopEvent" then
+        if _G.antiillegalroom then
+        if args[1] == "IllegalRoom" then
+           return
+        end
+        end
+    end
+    return namecall(self, table.unpack(args))
+end)
+
+else
+end
+
+Toggles:AddToggle({
+    Name = "Inf Energy",
+    Default = false,
+    Callback = function(infstam)
+        spawn(function()
+            if infstam then
+                _G.infenegy = true
+                local assscript = game.Players.LocalPlayer.Backpack.Local:FindFirstChild("CombatMain")
+                    for i,garbage in next, getgc() do
+                        if type(garbage) == "function" and getfenv(garbage).script == assscript then
+                        local Name = getinfo(garbage).name
+                        if Name == "AddStamina" then
+                            _G.stamfunction = garbage
+                            setupvalue(garbage,1,math.huge)
+                        end
+                    end
+                end
+                setupvalue(_G.stamfunction, 1, math.huge)
+                notify("Life Sentence Fucker","Inf Energy On")
+            else   
+                _G.infenegy = false
+                setupvalue(_G.stamfunction, 1, 100)
+                notify("Life Sentence Fucker","Inf Energy Off")
+            end 
+        while _G.infenegy do task.wait()
+            pcall(function()
+            if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health <= 0 then
+                task.wait(6)
+                if infstam then
+                local assscript = game.Players.LocalPlayer.Backpack.Local:FindFirstChild("CombatMain")
+                    for i,garbage in next, getgc() do
+                        if type(garbage) == "function" and getfenv(garbage).script == assscript then
+                        local Name = getinfo(garbage).name
+                        if Name == "AddStamina" then
+                            _G.stamfunction = garbage
+                            setupvalue(garbage,1,math.huge)
+                        end
+                    end
+                end
+                end
+                end
+            end)
+            end
+        end)
+    end
+})
+
+Toggles:AddBind({
+	Name = "Buy Ammo",
+	Default = Enum.KeyCode.G,
+	Hold = false,
+	Callback = function()
+		    
+    if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool") then
+        if game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("GunType") then
+            local gun = game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool"):FindFirstChild("GunType").Value
+
+    local ohString1 = "BuyAmmo"
+    local ohString2 = gun
+
+    game:GetService("ReplicatedStorage").Events.WeaponEvent:FireServer(ohString1, ohString2)
+
+    else
+    notify("Life Sentence Fucker","Equip A Fire Arm First!")
+    end    
+    else
+    notify("Life Sentence Fucker","Equip A Fire Arm First!")
+    end
+	end    
+})
+
+Toggles:AddToggle({
+	Name = "Auto Stomp",
+	Default = false,
+	Hold = false,
+	Callback = function(astomp)
+        spawn(function()    
+            if astomp then
+                _G.autostomp = true
+                notify("Life Sentence Fucker","Auto Stomp On")
+            else
+                _G.autostomp = false
+                notify("Life Sentence Fucker","Auto Stomp Off")
+            end
+    while _G.autostomp do task.wait(0.2)
+        local ohString1 = "EPress"
+        game:GetService("ReplicatedStorage").Events.WeaponEvent:FireServer(ohString1)
+    end
+end)
+end
+})
+
+Toggles:AddToggle({
+    Name = "Kill Aura",
+    Default = false,
+    Callback = function(kaura)
+        spawn(function()
+
+            if kaura then
+                _G.killaura = true
+                notify("Life Sentence Fucker","Kill Aura On")
+            else
+                _G.killaura = false
+                notify("Life Sentence Fucker","Kill Aura Off")
+            end
+        while _G.killaura do task.wait(0.1)
+            pcall(function()
+            local target = GetTarget()
+            if target.Parent ~= game.Players.LocalPlayer.Character then
+            if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Melee") then
+                game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):Activate()
+                touch(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target)
+            end  
+            end
+            end)
+        
+        end    
+
+
+        end)
+    end
+})
+
+Toggles:AddSlider({
+	Name = "Kill Aura Range",
+	Min = 1,
+	Max = 16,
+	Default = 5,
+	Color = Color3.fromRGB(200,200,200),
+	Increment = 0.1,
+	ValueName = "Range",
+	Callback = function(kaurarange)
+		_G.killaurarange = tonumber(kaurarange)
+	end    
+})
+
+game:GetService("RunService").Heartbeat:Connect(function()
+    pcall(function()
+        --- anti noclip bypass
+        if not game.Players.LocalPlayer.Backpack.Local.CombatMain:FindFirstChild("Bypassedantinoclip") then
+        local n = Instance.new("Model",game.Players.LocalPlayer.Backpack.Local.CombatMain)
+        n.Name = "Bypassedantinoclip"
+        local anticlip = getsenv(game.Players.LocalPlayer.Backpack.Local.CombatMain).CheckClip
+        hookfunction(anticlip, function()
+        warn("Not flagged cuz i bypassed anti noclip")
+        end)
+        end
+        --- im not gonna slow down my character bc i shot my gun
+        if not game.Players.LocalPlayer.Backpack.Local.CombatMain:FindFirstChild("Noslowdowncharacterbruh") then
+        local n2 = Instance.new("Model",game.Players.LocalPlayer.Backpack.Local.CombatMain)
+        n2.Name = "Noslowdowncharacterbruh"
+        local gunslow = getsenv(game.Players.LocalPlayer.Backpack.Local.CombatMain).SlowPlayer
+        hookfunction(gunslow, function()
+        warn("Sorry but im not gonna slow down my character bc i shot my gun")
+        end)
+        end
+        --- anti tp bypass
+        if game.Players.LocalPlayer.Backpack.Stats.TeleportPass.Value == false then
+            game.Players.LocalPlayer.Backpack.Stats.TeleportPass.Value = true
+        end
+        --- literally atleast 75% of the entire anti cheat is in that one script (btw it literally has nothing to do with the death screen)
+        if game.Players.LocalPlayer.Backpack.Local:FindFirstChild("Dead") then
+            game.Players.LocalPlayer.Backpack.Local.Dead:Destroy()
+        end    
+    end)
+end)
+
+end)

@@ -678,7 +678,7 @@ Toggles:AddToggle({
         while _G.noslow do task.wait()
             pcall(function()
                 if game:GetService("Players").LocalPlayer.Backpack.Stats.MeleeDelay.Value == true then
-                    if _G.originspeed > 6 then
+                    if _G.originspeed > 15 then
                         repeat task.wait() game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = _G.originspeed until game:GetService("Players").LocalPlayer.Backpack.Stats.MeleeDelay.Value == false
                     end
                 else
@@ -703,7 +703,7 @@ Toggles:AddToggle({
         while _G.noslow2 do task.wait()
             pcall(function()
                 if game:GetService("Players").LocalPlayer.Backpack.Stats.CanReload.Value == false or game:GetService("Players").LocalPlayer.Backpack.Stats.CanFire.Value == false then
-                    if _G.originspeed2 > 6 then
+                    if _G.originspeed2 > 15 then
                         repeat task.wait() game:GetService("Players").LocalPlayer.Character.Humanoid.WalkSpeed = _G.originspeed2 until game:GetService("Players").LocalPlayer.Backpack.Stats.CanReload.Value == true or game:GetService("Players").LocalPlayer.Backpack.Stats.CanFire.Value == true
                     end
                 else

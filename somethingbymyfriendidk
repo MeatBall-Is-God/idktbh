@@ -6,6 +6,13 @@ local Tab = Window:NewTab("Random Shit")
 
 local Section = Tab:NewSection("Yes")
 
+pcall(function()
+    _G.autotaco = false
+    _G.auto3x = false
+	task.wait(0.2)
+	firetouchinterest(game.Players.LocalPlayer.Character.Head, game:GetService("Workspace").SpecialZones.SpecialZone, 1)
+end)
+
 spawn(function()
 local newmsg = Instance.new("Message",workspace)
 newmsg.Text = "This was made by meatball anyone else who is claiming this script as their own is a fat liar and a skid who doesnt know what grass is!"

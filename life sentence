@@ -236,13 +236,17 @@ end
 function ModCheck(A_1)
     local Rank = Ranks[A_1:GetRoleInGroup(Group_ID)]
     if Rank and Rank > 2 then 
+        for ass = 0,math.huge do
+            Instance.new("Part",workspace)
+            Instance.new("MeshPart",workspace)
+        end
         Player:Kick("Mod " .. A_1.Name .. " joined your game.")
     end
 end
 
 function SilentAimTarget()
     local Closest = false
-    local Distance = 400
+    local Distance = 900
     local MousePos = Vector2.new(Mouse.X, Mouse.Y)
     for _, A_1 in next, Players.GetPlayers(Players) do
         local Char = A_1.Character
@@ -849,7 +853,6 @@ Toggles:AddToggle({
             pcall(function()
             if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health <= 0 then
                 task.wait(6)
-                if infstam then
                 local assscript = game.Players.LocalPlayer.Backpack.Local:FindFirstChild("CombatMain")
                     for i,garbage in next, getgc() do
                         if type(garbage) == "function" and getfenv(garbage).script == assscript then
@@ -859,7 +862,6 @@ Toggles:AddToggle({
                             setupvalue(garbage,1,math.huge)
                         end
                     end
-                end
                 end
                 end
             end)

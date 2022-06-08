@@ -277,7 +277,7 @@ function touch(A_1, A_2)
     end)
 end
 
-local W1 = OrionLib:MakeWindow({Name = "Life Sentence Fucker", HidePremium = false, SaveConfig = false, ConfigFolder = "Life Sentence Fucker"})
+local W1 = OrionLib:MakeWindow({Name = "Life Sentence Fucker By RandomHaxer2", HidePremium = false, SaveConfig = false, ConfigFolder = "Life Sentence Fucker By RandomHaxer2"})
 
 OrionLib:MakeNotification({
     Name = "Life Sentence Fucker",

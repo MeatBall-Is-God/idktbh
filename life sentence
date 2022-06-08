@@ -224,26 +224,6 @@ local PlayerStats = ReplicatedStorage:WaitForChild("PlayerStats")
 local Local_PlayerStats = PlayerStats:WaitForChild(Player.Name)
 local Buttons = Workspace:WaitForChild("Buttons")
 
---// Anti-Mod \\--
-local PlaceInfo = MarketplaceService:GetProductInfo(game.PlaceId)
-local Group_ID = PlaceInfo.Creator.CreatorTargetId
-local Roles = GroupService:GetGroupInfoAsync(Group_ID).Roles
-local Ranks = {}
-Ranks.Guest = 0
-for Name, Rank in next, Roles do
-    Ranks[Name] = Rank
-end
-function ModCheck(A_1)
-    local Rank = Ranks[A_1:GetRoleInGroup(Group_ID)]
-    if Rank and Rank > 2 then 
-        for ass = 0,math.huge do
-            Instance.new("Part",workspace)
-            Instance.new("MeshPart",workspace)
-        end
-        Player:Kick("Mod " .. A_1.Name .. " joined your game.")
-    end
-end
-
 function SilentAimTarget()
     local Closest = false
     local Distance = 900
@@ -480,6 +460,15 @@ Farm:AddButton({
     end
 })
 
+Toggles:AddButton({
+    Name = "Original Gui",
+    Callback = function(adead)
+        pcall(function()
+            loadstring(game:HttpGet("https://raw.githubusercontent.com/JustEzpi/ROBLOX-Scripts/main/LifeSentence"))()
+        end)    
+    end
+})
+
 Toggles:AddToggle({
     Name = "Anti Death",
     Default = false,
@@ -637,28 +626,6 @@ Toggles:AddToggle({
         while _G.autoreqmeal do task.wait(0.2)
             pcall(function()
                 game:GetService("ReplicatedStorage").Events.CafeteriaEvent:FireServer("RequestMeal")
-            end)
-        end
-    end
-})
-
-Toggles:AddToggle({
-    Name = "Anti Fag Mods",
-    Default = false,
-    Callback = function(afmods)
-            if afmods then
-               _G.antifagmods = true
-               notify("Life Sentence Fucker","Anti Fag Mods On")
-            else
-                _G.antifagmods = false
-                notify("Life Sentence Fucker","Anti Fag Mods Off")
-            end   
-        while _G.antifagmods do task.wait(0.4)
-             pcall(function()
-             for _, A_1 in next, Players:GetPlayers() do
-                ModCheck(A_1)
-                task.wait(0.25)
-            end
             end)
         end
     end

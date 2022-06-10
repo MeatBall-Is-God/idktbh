@@ -7,6 +7,9 @@ local Tab = Window:NewTab("Random Shit")
 local Section = Tab:NewSection("Yes")
 
 pcall(function()
+    if workspace:FindFirstChild("SafeZones") then
+        workspace:FindFirstChild("SafeZones"):Destroy()
+    end    
     _G.killaurarange = 5
     _G.killaura = false
     _G.killaura2 = false
@@ -147,7 +150,24 @@ Section:NewSlider("Kill aura range", "Wtf Did You Think It Was", 25, 1, function
     _G.killaurarange = tonumber(kaurarange)
 end)
 
-Section:NewToggle("Auto Bring Tacos", "auto brings tacos wtf did you think (dont use when in spawn)", function(state2)
+Section:NewToggle("Auto 3x", "auto 3x wtf did you think", function(state5)
+    if state5 then
+        _G.auto3x = true
+    else
+        _G.auto3x = false
+        task.wait(0.1)
+        firetouchinterest(game.Players.LocalPlayer.Character["Head"], game:GetService("Workspace").SpecialZones.SpecialZone, 1)
+    end
+
+while _G.auto3x do task.wait()
+pcall(function()
+firetouchinterest(game.Players.LocalPlayer.Character["Head"], game:GetService("Workspace").SpecialZones.SpecialZone, 0)
+firetouchinterest(game.Players.LocalPlayer.Character["Head"], game:GetService("Workspace").SpecialZones.SpecialZone, 1)
+end)
+end
+end)
+
+Section:NewToggle("Auto Bring Tacos", "auto bring tacos wtf did you think", function(state2)
     if state2 then
         _G.autotaco = true
     else
@@ -157,8 +177,8 @@ Section:NewToggle("Auto Bring Tacos", "auto brings tacos wtf did you think (dont
 while _G.autotaco do task.wait(0.5)
 for i,v in pairs(workspace:GetChildren()) do
     if v.Name == "Taco" then
-        firetouchinterest(game.Players.LocalPlayer.Character.Torso, v:FindFirstChild("Handle"), 0)
-        firetouchinterest(game.Players.LocalPlayer.Character.Torso, v:FindFirstChild("Handle"), 1)
+        firetouchinterest(game.Players.LocalPlayer.Character["Head"], v:FindFirstChild("Handle"), 0)
+        firetouchinterest(game.Players.LocalPlayer.Character["Head"], v:FindFirstChild("Handle"), 1)
     end
 end    
 end

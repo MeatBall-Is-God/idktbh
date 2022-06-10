@@ -7,6 +7,9 @@ local Tab = Window:NewTab("Random Shit")
 local Section = Tab:NewSection("Yes")
 
 pcall(function()
+    _G.killaurarange = 5
+    _G.killaura = false
+    _G.killaura2 = false
     _G.autotaco = false
     _G.auto3x = false
 	task.wait(0.2)
@@ -32,29 +35,119 @@ Section:NewButton("Quick Spawn", "Quickly Tps You To Spawn Because Youre Shit at
     game:GetService("ReplicatedStorage").Events.FillEvent:FireServer()
 end)
 
-Section:NewButton("god mode", "It makes you god mode go out of spawn before using", function()
+Section:NewButton("god mode", "It makes you god mode (breaks quickspawn)", function()
   loadstring(game:HttpGet(('https://raw.githubusercontent.com/Cesare0328/my-scripts/main/joke%20anticheat.lua'),true))() -- idk obfuscated
 end)
 
-Section:NewLabel("Walk Out Of Safe Zone First For This To Work")
+function GetTarget()
+    local Distance = _G.killaurarange
+    local Closest = false
+    for _, A_1 in next, game.Players:GetPlayers() do
+        local Char = A_1.Character
+        if not Char:FindFirstChild("HumanoidRootPart") then
+        else    
+        -- Player Check
+        if Char and A_1 ~= game.Players.LocalPlayer and Char:FindFirstChild("Head") and Char:FindFirstChild("Humanoid") and Char.Humanoid.Health > 0 and not Char.HumanoidRootPart:FindFirstChild("ForceField") then
+                -- Distance Check
+                local New_Distance = game.Players.LocalPlayer:DistanceFromCharacter(Char.Head.Position)
+                if New_Distance < Distance then
+                    Distance = New_Distance
+                    Closest = Char.Torso
+            end
+        end
+        end
+end
+    return Closest
 
-Section:NewToggle("Auto 3x", "Read dumbass", function(state)
-    if state then
-	_G.auto3x = true
-    else
-	_G.auto3x = false
-	task.wait(0.2)
-	firetouchinterest(game.Players.LocalPlayer.Character.Head, game:GetService("Workspace").SpecialZones.SpecialZone, 1)
-    end
-while _G.auto3x do task.wait()
-    pcall(function()
-        firetouchinterest(game.Players.LocalPlayer.Character.Head, game:GetService("Workspace").SpecialZones.SpecialZone, 0)
-        firetouchinterest(game.Players.LocalPlayer.Character.Head, game:GetService("Workspace").SpecialZones.SpecialZone, 1)
-    end)
+end
+
+
+Section:NewToggle("KillAura Normal", "Read dumbass", function(state2)
+if state2 then
+    _G.killaura = true
+    if _G.killaura2 then
+        _G.killaura2 = false
+    end    
+else
+    _G.killaura = false
+end
+while _G.killaura do task.wait()
+    if _G.killaura then
+        if _G.killaura2 then
+            _G.killaura2 = false
+        end    
+   pcall(function()
+        local target = GetTarget()
+        if target then
+        if target.Parent ~= game.Players.LocalPlayer.Character then
+        if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool") then
+            if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Handle") then
+            game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):Activate()
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 1)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 1)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 1)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 1)
+            end   
+        end
+        end
+        end
+   end)
+end
 end
 end)
 
-Section:NewToggle("Auto Bring Tacos", "Make sure to not be in spawn", function(state2)
+Section:NewToggle("KillAura Tp", "Read dumbass", function(state2)
+if state2 then
+    _G.killaura2 = true
+    if _G.killaura then
+        _G.killaura = false
+    end    
+else
+    _G.killaura2 = false
+end
+while _G.killaura2 do task.wait()
+    if _G.killaura2 then
+        if _G.killaura then
+            _G.killaura = false
+        end    
+   pcall(function()
+        local target = GetTarget()
+        if target then
+        if target.Parent ~= game.Players.LocalPlayer.Character then
+        if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool") then
+            _G.allreadykilling = true
+            if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Handle") then
+            game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):Activate()
+            game.Players.LocalPlayer.Character.Torso.CFrame = target.CFrame *CFrame.new(0,0,3)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 1)
+            game.Players.LocalPlayer.Character.Torso.CFrame = target.CFrame *CFrame.new(0,0,3)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 1)
+            game.Players.LocalPlayer.Character.Torso.CFrame = target.CFrame *CFrame.new(0,0,3)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 1)
+            game.Players.LocalPlayer.Character.Torso.CFrame = target.CFrame *CFrame.new(0,0,3)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 0)
+            firetouchinterest(game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool").Handle, target, 1)
+            end   
+        end
+        end
+        end
+   end)
+end
+end
+end)
+
+Section:NewSlider("Kill aura range", "Wtf Did You Think It Was", 25, 1, function(kaurarange)
+    _G.killaurarange = tonumber(kaurarange)
+end)
+
+Section:NewToggle("Auto Bring Tacos", "auto brings tacos wtf did you think (dont use when in spawn)", function(state2)
     if state2 then
         _G.autotaco = true
     else
@@ -62,23 +155,20 @@ Section:NewToggle("Auto Bring Tacos", "Make sure to not be in spawn", function(s
     end
 
 while _G.autotaco do task.wait(0.5)
-if not game.Players.LocalPlayer.Character.HumanoidRootPart:FindFirstChild("ForceField") then    
 for i,v in pairs(workspace:GetChildren()) do
-  if v.Name == "Taco" then
-    firetouchinterest(game.Players.LocalPlayer.Character.Head, v.Handle, 0)
-    firetouchinterest(game.Players.LocalPlayer.Character.Head, v.Handle, 1)
-  end
-end 
-end
+    if v.Name == "Taco" then
+        firetouchinterest(game.Players.LocalPlayer.Character.Torso, v:FindFirstChild("Handle"), 0)
+        firetouchinterest(game.Players.LocalPlayer.Character.Torso, v:FindFirstChild("Handle"), 1)
+    end
+end    
 end
 end)
-
 
 Section:NewSlider("Speed", "Wtf Did You Think It Was", 500, 0, function(s) -- 500 (MaxValue) | 0 (MinValue)
    if game.Players.LocalPlayer.PlayerScripts.SpeedKick.Disabled == false then
 	game.Players.LocalPlayer.PlayerScripts.SpeedKick.Disabled = true
-   elseif game.Players.LocalPlayer.PlayerScripts.SpeedKick.Disabled == true then
    end
+   task.wait(0.2)
    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = tonumber(s)
 end)
 

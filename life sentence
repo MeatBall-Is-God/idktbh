@@ -1,3 +1,7 @@
+if game.PlaceId == 7860844204 then
+
+if game:GetService("Workspace").Camera.CameraType == Enum.CameraType.Custom then
+
 local MAKER = "RandomHaxer2"
 local Confirm = Instance.new("ScreenGui")
 local Frame = Instance.new("Frame")
@@ -186,18 +190,21 @@ Confirm.Parent = game:GetService("CoreGui")
 
 TextButton.MouseButton1Click:Connect(function()
     Confirm:Destroy()
+--pcall(function()    
     
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
 pcall(function()
-    for i,garbage in pairs(getgc()) do
-        if type(garbage) == "function" and getinfo(garbage).name == "AddStamina" and getfenv(garbage).script == game:GetService("Players").LocalPlayer.Backpack.Local.CombatMain then
-            _G.stamfunction = garbage
-        end    
+    local assscript = game.Players.LocalPlayer.Backpack.Local:FindFirstChild("CombatMain")
+    for i,garbage in next, getgc() do
+        if type(garbage) == "function" and getfenv(garbage).script == assscript then
+            local Name = getinfo(garbage).name
+            if Name == "AddStamina" then
+                _G.stamfunction = garbage
+            end
+        end
     end
     
-    _G.killaurarange = 5
-    _G.teleportforwardrange = 5
     _G.adeadsum = false
 end)
 
@@ -223,6 +230,18 @@ local LootSpawns = Workspace:WaitForChild("LootSpawns")
 local PlayerStats = ReplicatedStorage:WaitForChild("PlayerStats")
 local Local_PlayerStats = PlayerStats:WaitForChild(Player.Name)
 local Buttons = Workspace:WaitForChild("Buttons")
+
+function itemsearch(arg)
+    local item
+    for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.HUD.CraftingFrame.Crafting.ScrollingFrame:GetChildren()) do 
+        if string.lower(string.sub(v.Name, 1, string.len(arg))) == string.lower(arg) then
+            item = v
+    	end
+	end
+    if item then
+    return item
+    end
+end
 
 function SilentAimTarget()
     local Closest = false
@@ -277,7 +296,7 @@ function touch(A_1, A_2)
     end)
 end
 
-local W1 = OrionLib:MakeWindow({Name = "Life Sentence Fucker By RandomHaxer2", HidePremium = false, SaveConfig = false, ConfigFolder = "Life Sentence Fucker By RandomHaxer2"})
+local W1 = OrionLib:MakeWindow({Name = "Life Sentence Fucker", HidePremium = false, SaveConfig = false, ConfigFolder = "Life Sentence Fucker"})
 
 OrionLib:MakeNotification({
     Name = "Life Sentence Fucker",
@@ -302,6 +321,12 @@ local Toggles = W1:MakeTab({
     PremiumOnly = false
 })
 
+local Craft = W1:MakeTab({
+    Name = "Crafting",
+    Icon = "rbxassetid://6890648157", --- rbxassetid://4483345998
+    PremiumOnly = false
+})
+
 local Farm = W1:MakeTab({
     Name = "Farming",
     Icon = "rbxassetid://6890648157", --- rbxassetid://4483345998
@@ -310,7 +335,7 @@ local Farm = W1:MakeTab({
 
 Farm:AddToggle({
     Name = "Auto Farm Safe/Register",
-    Default = false,
+    Default = _G.autoFarmRegisters,
     Callback = function(asafe)
         spawn(function()
             if asafe then
@@ -324,13 +349,13 @@ Farm:AddToggle({
                 if not _G.scrap and not _G.adeadsum then
                 _G.rob = true    
                 for i,v in pairs(game.Workspace.Robbable:GetDescendants()) do
-                    local orginalposition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                    local orginalposition = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
                     if v.Name == "Safe" or v.Name == "Register" then
-                        if v.Door.Attachment.ProximityPrompt.Enabled == true then
+                        if v.Door.Attachment.ProximityPrompt.Enabled == true and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
                         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Door.Position)
+                        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(v.Door.Position)
                         task.wait(0.2)
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored = true
                         fireproximityprompt(v.Door.Attachment.ProximityPrompt, 4, false)
                         task.wait(0.4)
                         for i,v in pairs(workspace:GetChildren()) do
@@ -340,8 +365,8 @@ Farm:AddToggle({
                         end
                         task.wait(0.4)
                         game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-                        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(orginalposition)
+                        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored = false
+                        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(orginalposition)
                         task.wait(0.2)
                         end
                     end
@@ -359,13 +384,13 @@ Farm:AddButton({
             if not _G.scrap and not _G.adeadsum then
             _G.rob = true    
             for i,v in pairs(game.Workspace.Robbable:GetDescendants()) do
-                    local orginalposition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                    local orginalposition = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
                 if v.Name == "Safe" or v.Name == "Register" then
-                    if v.Door.Attachment.ProximityPrompt.Enabled == true then
+                    if v.Door.Attachment.ProximityPrompt.Enabled == true and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
                     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Door.Position)
+                    game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(v.Door.Position)
                     task.wait(0.2)
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                    game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored = true
                     fireproximityprompt(v.Door.Attachment.ProximityPrompt, 4, false)
                     task.wait(0.4)
                     for i,v in pairs(workspace:GetChildren()) do
@@ -375,8 +400,8 @@ Farm:AddButton({
                     end
                     task.wait(0.4)
                     game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(orginalposition)
+                    game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored = false
+                    game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(orginalposition)
                     task.wait(0.2)
                 end
             end
@@ -388,15 +413,15 @@ Farm:AddButton({
 
 Farm:AddToggle({
     Name = "Auto Collect All Scrap",
-    Default = false,   
+    Default = _G.autoFarmScraptog,   
     Callback = function(ascrap)
         spawn(function()
             if ascrap then
                 _G.autocollectscrap = true
-                notify("Transfurify Fucker","Auto Collect All Scrap On")
+                notify("Life Sentence Fucker","Auto Collect All Scrap On")
             else
                 _G.autocollectscrap = false
-                notify("Transfurify Fucker","Auto Collect All Scrap Off")
+                notify("Life Sentence Fucker","Auto Collect All Scrap Off")
             end    
             while _G.autocollectscrap do task.wait(0.1)
                 if not _G.rob and not _G.adeadsum then
@@ -405,18 +430,18 @@ Farm:AddToggle({
                     if v.Name == "Part" then
                         if v:FindFirstChild("Attachment") then
                             if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt") then
-                               if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt").Enabled == true then
+                               if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt").Enabled == true and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
                                    task.wait(0.1)
-                                   local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                                   local oldpos = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
                                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-                                   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+                                   game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(v.Position)
                                    task.wait(0.3)
-                                   game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                                   game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored = true
                                    fireproximityprompt(v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt"))
                                    task.wait(0.3)
                                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-                                   game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false                           
-                                   game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
+                                   game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored = false                           
+                                   game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(oldpos)
                                end
                             end
                         end
@@ -438,18 +463,18 @@ Farm:AddButton({
             if v.Name == "Part" then
                 if v:FindFirstChild("Attachment") then
                     if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt") then
-                       if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt").Enabled == true then
+                       if v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt").Enabled == true and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
                            task.wait(0.1)
-                           local oldpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+                           local oldpos = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
                            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 0
-                           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(v.Position)
+                           game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(v.Position)
                            task.wait(0.3)
-                           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = true
+                           game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored = true
                            fireproximityprompt(v:FindFirstChild("Attachment"):FindFirstChild("ProximityPrompt"))
                            task.wait(0.3)
                            game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
-                           game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false                           
-                           game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(oldpos)
+                           game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Anchored = false                           
+                           game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(oldpos)
                        end
                     end
                 end
@@ -464,14 +489,14 @@ Toggles:AddButton({
     Name = "Original Gui",
     Callback = function(adead)
         pcall(function()
-            loadstring(game:HttpGet("https://raw.githubusercontent.com/JustEzpi/ROBLOX-Scripts/main/LifeSentence"))()
+            loadstring(game:HttpGetAsync("https://raw.githubusercontent.com/JustEzpi/ROBLOX-Scripts/main/LifeSentence"))()
         end)    
     end
 })
 
 Toggles:AddToggle({
     Name = "Anti Death",
-    Default = false,
+    Default = _G.antiDeath,
     Callback = function(adead)
         spawn(function()
             if adead then
@@ -483,29 +508,29 @@ Toggles:AddToggle({
             end
             while _G.antideath do task.wait()
    --pcall(function()
-    if game:GetService("Players").LocalPlayer.Backpack.Stats.RagDolled.Value == true or game:GetService("Players").LocalPlayer.Backpack.Stats.Downed.Value == true then
+    if game:GetService("Players").LocalPlayer.Backpack.Stats.RagDolled.Value == true or game:GetService("Players").LocalPlayer.Backpack.Stats.Downed.Value == true and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
         if _G.customantideathpos then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
         _G.antideath = false
         _G.adeadsum = true
         repeat task.wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
         until game:GetService("Players").LocalPlayer.Backpack.Stats.Downed.Value == false
         local randompos = math.random(1,3)
         if randompos == 1 then
         for cracker = 0,35 do
         task.wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-8.68285, 4.26315, -46.2956)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(-8.68285, 4.26315, -46.2956)
         end
         elseif randompos == 2 then
         for cracker2 = 0,35 do
         task.wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-106.787, 4.96343, -82.6467)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(-106.787, 4.96343, -82.6467)
         end
         elseif randompos == 3 then
         for cracker3 = 0,35 do
         task.wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(142.844, 4.96343, -100.531)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(142.844, 4.96343, -100.531)
         end
         end
         _G.antideath = true
@@ -514,20 +539,20 @@ Toggles:AddToggle({
         
         _G.antideath = false
         _G.adeadsum = true
-        local originalposition = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
+        local originalposition = game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Position
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
         repeat task.wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(47199.1, 12867.2, 53176.7)
         until game:GetService("Players").LocalPlayer.Backpack.Stats.Downed.Value == false
         wait(0.3)
         for cracker = 0,35 do
         task.wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalposition)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalposition)
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalposition)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(originalposition)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(originalposition)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(originalposition)
         end
         task.wait()
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originalposition)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(originalposition)
         _G.antideath = true
         _G.adeadsum = false
         end
@@ -540,7 +565,7 @@ end
 
 Toggles:AddToggle({
     Name = "Anti Death Random Position",
-    Default = false,
+    Default = _G.customAntiDeathPos,
     Callback = function(adeadc)
         spawn(function()
             if adeadc then
@@ -556,7 +581,7 @@ Toggles:AddToggle({
 
 Toggles:AddToggle({
     Name = "Silent Aim",
-    Default = false,
+    Default = _G.silentAim,
     Callback = function(silent)
         spawn(function()
             if silent then
@@ -595,7 +620,7 @@ end
 
 Toggles:AddToggle({
     Name = "Vape",
-    Default = false,
+    Default = _G.Vape,
     Callback = function(vap)
             if vap then
                _G.vape = true
@@ -614,7 +639,7 @@ Toggles:AddToggle({
 
 Toggles:AddToggle({
     Name = "Auto Request Cafeteria Meal",
-    Default = false,
+    Default = _G.autoReqMeal,
     Callback = function(ameal)
             if ameal then
                _G.autoreqmeal = true
@@ -633,7 +658,7 @@ Toggles:AddToggle({
 
 Toggles:AddToggle({
     Name = "No Melee Slow",
-    Default = false,
+    Default = _G.noSlow,
     Callback = function(nslow)
             if nslow then
                _G.noslow = true
@@ -658,7 +683,7 @@ Toggles:AddToggle({
 
 Toggles:AddToggle({
     Name = "No Gun Slow",
-    Default = false,
+    Default = _G.noSlow2,
     Callback = function(ngslow)
             if ngslow then
                _G.noslow2 = true
@@ -683,7 +708,7 @@ Toggles:AddToggle({
 
 Toggles:AddToggle({
     Name = "Auto Reload FireArm",
-    Default = false,
+    Default = _G.autoReload,
     Callback = function(areload)
             if areload then
                 if not _G.autoreloadfirsttime then
@@ -699,7 +724,7 @@ Toggles:AddToggle({
                 _G.autoreload = false
                 notify("Life Sentence Fucker","Auto Reload Off")
             end   
-        while _G.autoreload do task.wait(0.1)
+        while _G.autoreload do task.wait(0.3)
             pcall(function()
                 if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool") then
                     if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool"):FindFirstChild("Clip") then
@@ -725,7 +750,7 @@ Toggles:AddToggle({
 
 Toggles:AddToggle({
     Name = "Kill Say",
-    Default = false,
+    Default = _G.killSay,
     Callback = function(ksay)
         if ksay then
             _G.killsay = true
@@ -754,7 +779,7 @@ end)
 
 Toggles:AddToggle({
     Name = "Anti Illegal Room",
-    Default = false,
+    Default = _G.antiIllegalRoom,
     Callback = function(aillegalroom)
         spawn(function()
             if aillegalroom then
@@ -794,11 +819,10 @@ end
 
 Toggles:AddToggle({
     Name = "Inf Energy",
-    Default = false,
+    Default = _G.infEnergy,
     Callback = function(infstam)
         spawn(function()
             if infstam then
-                _G.infenegy = true
                 local assscript = game.Players.LocalPlayer.Backpack.Local:FindFirstChild("CombatMain")
                     for i,garbage in next, getgc() do
                         if type(garbage) == "function" and getfenv(garbage).script == assscript then
@@ -809,30 +833,20 @@ Toggles:AddToggle({
                         end
                     end
                 end
-                setupvalue(_G.stamfunction, 1, math.huge)
                 notify("Life Sentence Fucker","Inf Energy On")
             else   
-                _G.infenegy = false
-                setupvalue(_G.stamfunction, 1, 100)
-                notify("Life Sentence Fucker","Inf Energy Off")
-            end 
-        while _G.infenegy do task.wait()
-            pcall(function()
-            if game.Players.LocalPlayer.Character:FindFirstChild("Humanoid").Health <= 0 then
-                task.wait(6)
                 local assscript = game.Players.LocalPlayer.Backpack.Local:FindFirstChild("CombatMain")
                     for i,garbage in next, getgc() do
                         if type(garbage) == "function" and getfenv(garbage).script == assscript then
                         local Name = getinfo(garbage).name
                         if Name == "AddStamina" then
                             _G.stamfunction = garbage
-                            setupvalue(garbage,1,math.huge)
+                            setupvalue(garbage,1,100)
                         end
                     end
                 end
-                end
-            end)
-            end
+                notify("Life Sentence Fucker","Inf Energy Off")
+            end 
         end)
     end
 })
@@ -867,7 +881,7 @@ Toggles:AddBind({
 	Hold = false,
 	Callback = function()
     if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
-        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame *= CFrame.new(0, 0, -5)
+        game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame *= CFrame.new(0, 0, -_G.teleportforwardrange)
     end
     end
 })
@@ -887,7 +901,7 @@ Toggles:AddSlider({
 
 Toggles:AddToggle({
 	Name = "Auto Stomp",
-	Default = false,
+	Default = _G.autoStomp,
 	Hold = false,
 	Callback = function(astomp)
         spawn(function()    
@@ -908,7 +922,7 @@ end
 
 Toggles:AddToggle({
     Name = "Kill Aura",
-    Default = false,
+    Default = _G.killauratog,
     Callback = function(kaura)
         spawn(function()
 
@@ -940,7 +954,7 @@ Toggles:AddToggle({
 Toggles:AddSlider({
 	Name = "Kill Aura Range",
 	Min = 1,
-	Max = 16,
+	Max = 15,
 	Default = 5,
 	Color = Color3.fromRGB(200,200,200),
 	Increment = 0.1,
@@ -950,26 +964,50 @@ Toggles:AddSlider({
 	end    
 })
 
-game:GetService("RunService").Heartbeat:Connect(function()
+Craft:AddTextbox({
+	Name = "Craft Gun/Item",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(item2)
+		local item = itemsearch(item2)
+		if item then
+		    local originpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+		    task.wait()
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(186.12147521972656, 7.7288360595703125, -113.31971740722656)
+		    task.wait(0.3)
+		    fireproximityprompt(game:GetService("Workspace").WorkBench.MainPart.Attachment.ProximityPrompt)
+		    task.wait(0.2)
+		    game:GetService("ReplicatedStorage").Events.CraftEvent:FireServer(""..item.Name.."")
+		    task.wait(0.5)
+		    game:GetService("Players").LocalPlayer.PlayerGui.HUD.CraftingFrame.Visible = false
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originpos)
+		end 
+    end
+})
+
+spawn(function()
+if not _G.allreadybypassed then
+_G.allreadybypassed = true
+while true do task.wait(0.5)    
     pcall(function()
         --- anti noclip bypass
-        if not game.Players.LocalPlayer.Backpack.Local.CombatMain:FindFirstChild("Bypassedantinoclip") then
-        local n = Instance.new("Model",game.Players.LocalPlayer.Backpack.Local.CombatMain)
-        n.Name = "Bypassedantinoclip"
+        --if not game.Players.LocalPlayer.Backpack.Local.CombatMain:FindFirstChild("Bypassedantinoclip") then
+        --local n = Instance.new("Model",game.Players.LocalPlayer.Backpack.Local.CombatMain)
+       -- n.Name = "Bypassedantinoclip"
         local anticlip = getsenv(game.Players.LocalPlayer.Backpack.Local.CombatMain).CheckClip
         hookfunction(anticlip, function()
-        warn("Not flagged cuz i bypassed anti noclip")
+            
         end)
-        end
+        --end
         --- im not gonna slow down my character bc i shot my gun
-        if not game.Players.LocalPlayer.Backpack.Local.CombatMain:FindFirstChild("Noslowdowncharacterbruh") then
-        local n2 = Instance.new("Model",game.Players.LocalPlayer.Backpack.Local.CombatMain)
-        n2.Name = "Noslowdowncharacterbruh"
+        --if not game.Players.LocalPlayer.Backpack.Local.CombatMain:FindFirstChild("Noslowdowncharacterbruh") then
+        --local n2 = Instance.new("Model",game.Players.LocalPlayer.Backpack.Local.CombatMain)
+        --n2.Name = "Noslowdowncharacterbruh"
         local gunslow = getsenv(game.Players.LocalPlayer.Backpack.Local.CombatMain).SlowPlayer
         hookfunction(gunslow, function()
-        warn("Sorry but im not gonna slow down my character bc i shot my gun")
+        
         end)
-        end
+        --end
         --- anti tp bypass
         if game.Players.LocalPlayer.Backpack.Stats.TeleportPass.Value == false then
             game.Players.LocalPlayer.Backpack.Stats.TeleportPass.Value = true
@@ -979,6 +1017,38 @@ game:GetService("RunService").Heartbeat:Connect(function()
             game.Players.LocalPlayer.Backpack.Local.Dead:Destroy()
         end    
     end)
+end
+end
 end)
 
+local killmsg = Instance.new("Message",workspace)
+killmsg.Text = "Thanks for using my script!"
+task.wait(4)
+killmsg.Text = "Btw running this script twice will fuck ur game up"
+task.wait(7)
+killmsg:Destroy()
+
+--end)
 end)
+
+else
+	game.StarterGui:SetCore("SendNotification", {
+    Title = "Bro";
+    Text = "Spawn in first";
+    Icon = "rbxassetid://6890648157";
+    Duration = 3;
+    })
+    local vineboom = Instance.new("Sound",workspace)
+    vineboom.SoundId = "rbxassetid://7147484622"
+    vineboom.Volume = 5
+    vineboom:Play()
+    task.wait(2)
+    vineboom:Destroy()
+end
+else
+    local vineboom2 = Instance.new("Sound",workspace)
+    vineboom2.SoundId = "rbxassetid://9060808331"
+    vineboom2.Volume = 10
+    vineboom2:Play()
+    game.Players.LocalPlayer:Kick("Wrong game goto Life Sentence!")
+end

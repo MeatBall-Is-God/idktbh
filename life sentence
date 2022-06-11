@@ -194,7 +194,7 @@ TextButton.MouseButton1Click:Connect(function()
     
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-pcall(function()
+--pcall(function()
     local assscript = game.Players.LocalPlayer.Backpack.Local:FindFirstChild("CombatMain")
     for i,garbage in next, getgc() do
         if type(garbage) == "function" and getfenv(garbage).script == assscript then
@@ -206,7 +206,7 @@ pcall(function()
     end
     
     _G.adeadsum = false
-end)
+--end)
 
 --- this was straight up taken from justezpis gui im sorry but this script is meant to be a less laggier remake
 
@@ -235,7 +235,7 @@ function itemsearch(arg)
     local item
     for i, v in pairs(game:GetService("Players").LocalPlayer.PlayerGui.HUD.CraftingFrame.Crafting.ScrollingFrame:GetChildren()) do 
         if string.lower(string.sub(v.Name, 1, string.len(arg))) == string.lower(arg) then
-            item = v
+            item = v.Name
     	end
 	end
     if item then
@@ -266,6 +266,9 @@ end
 
 function GetTarget()
     -- Variables
+    if _G.killaurarange > 15 then
+        _G.killaurarange = 15
+    end    
     local Distance = _G.killaurarange
     local Closest = false
     local Cop = game:GetService("ReplicatedStorage").PlayerStats:FindFirstChild(game.Players.LocalPlayer.Character.Name).Cop.Value
@@ -629,30 +632,34 @@ Toggles:AddToggle({
                 _G.vape = false
                 notify("Life Sentence Fucker","Vape Off")
             end   
+        spawn(function()
         while _G.vape do task.wait(0.5)
             pcall(function()
                 game:GetService("ReplicatedStorage").Events.SnowBreath:FireServer("SnowBreath")
             end)
         end
+        end)
     end
 })
 
 Toggles:AddToggle({
     Name = "Auto Request Cafeteria Meal",
-    Default = _G.autoReqMeal,
-    Callback = function(ameal)
-            if ameal then
-               _G.autoreqmeal = true
-               notify("Life Sentence Fucker","Auto Request Meal On")
+    Default = _G.Vape,
+    Callback = function(areqmel)
+            if areqmel then
+               _G.autoreqmel = true
+               notify("Life Sentence Fucker","Auto Request Cafeteria Meal On")
             else
-                _G.autoreqmeal = false
-                notify("Life Sentence Fucker","Auto Request Meal Off")
+                _G.autoreqmel = false
+                notify("Life Sentence Fucker","Auto Request Cafeteria Meal Off")
             end   
-        while _G.autoreqmeal do task.wait(0.2)
+        spawn(function()
+        while _G.autoreqmel do task.wait(0.5)
             pcall(function()
                 game:GetService("ReplicatedStorage").Events.CafeteriaEvent:FireServer("RequestMeal")
             end)
         end
+        end)
     end
 })
 
@@ -667,6 +674,7 @@ Toggles:AddToggle({
                 _G.noslow = false
                 notify("Life Sentence Fucker","No Slow Off")
             end   
+        spawn(function()    
         while _G.noslow do task.wait()
             pcall(function()
                 if game:GetService("Players").LocalPlayer.Backpack.Stats.MeleeDelay.Value == true then
@@ -678,6 +686,7 @@ Toggles:AddToggle({
                 end    
             end)
         end
+        end)
     end
 })
 
@@ -691,7 +700,8 @@ Toggles:AddToggle({
             else
                 _G.noslow2 = false
                 notify("Life Sentence Fucker","No Gun Off")
-            end   
+            end 
+        spawn(function()    
         while _G.noslow2 do task.wait()
             pcall(function()
                 if game:GetService("Players").LocalPlayer.Backpack.Stats.CanReload.Value == false or game:GetService("Players").LocalPlayer.Backpack.Stats.CanFire.Value == false then
@@ -703,6 +713,7 @@ Toggles:AddToggle({
                 end    
             end)
         end
+        end)
     end
 })
 
@@ -710,6 +721,7 @@ Toggles:AddToggle({
     Name = "Auto Reload FireArm",
     Default = _G.autoReload,
     Callback = function(areload)
+                spawn(function()     
             if areload then
                 if not _G.autoreloadfirsttime then
                     _G.autoreloadfirsttime = true
@@ -723,7 +735,7 @@ Toggles:AddToggle({
             else
                 _G.autoreload = false
                 notify("Life Sentence Fucker","Auto Reload Off")
-            end   
+            end  
         while _G.autoreload do task.wait(0.3)
             pcall(function()
                 if game.Players.LocalPlayer.Character:FindFirstChildWhichIsA("Tool") then
@@ -744,6 +756,7 @@ Toggles:AddToggle({
                 end
             end)
         end
+        end)
     end
 })
 
@@ -881,6 +894,9 @@ Toggles:AddBind({
 	Hold = false,
 	Callback = function()
     if game.Players.LocalPlayer and game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") then
+        if _G.teleportforwardrange > 15 then
+            _G.teleportforwardrange = 15
+        end    
         game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame *= CFrame.new(0, 0, -_G.teleportforwardrange)
     end
     end
@@ -912,14 +928,16 @@ Toggles:AddToggle({
                 _G.autostomp = false
                 notify("Life Sentence Fucker","Auto Stomp Off")
             end
+    spawn(function()            
     while _G.autostomp do task.wait(0.2)
         local ohString1 = "EPress"
         game:GetService("ReplicatedStorage").Events.WeaponEvent:FireServer(ohString1)
     end
+    end)
 end)
 end
 })
-
+   
 Toggles:AddToggle({
     Name = "Kill Aura",
     Default = _G.killauratog,
@@ -945,10 +963,8 @@ Toggles:AddToggle({
             end)
         
         end    
-
-
         end)
-    end
+end
 })
 
 Toggles:AddSlider({
@@ -964,32 +980,11 @@ Toggles:AddSlider({
 	end    
 })
 
-Craft:AddTextbox({
-	Name = "Craft Gun/Item",
-	Default = "",
-	TextDisappear = true,
-	Callback = function(item2)
-		local item = itemsearch(item2)
-		if item then
-		    local originpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
-		    task.wait()
-		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(186.12147521972656, 7.7288360595703125, -113.31971740722656)
-		    task.wait(0.3)
-		    fireproximityprompt(game:GetService("Workspace").WorkBench.MainPart.Attachment.ProximityPrompt)
-		    task.wait(0.2)
-		    game:GetService("ReplicatedStorage").Events.CraftEvent:FireServer(""..item.Name.."")
-		    task.wait(0.5)
-		    game:GetService("Players").LocalPlayer.PlayerGui.HUD.CraftingFrame.Visible = false
-		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originpos)
-		end 
-    end
-})
-
 spawn(function()
 if not _G.allreadybypassed then
 _G.allreadybypassed = true
 while true do task.wait(0.5)    
-    pcall(function()
+    --pcall(function()
         --- anti noclip bypass
         --if not game.Players.LocalPlayer.Backpack.Local.CombatMain:FindFirstChild("Bypassedantinoclip") then
         --local n = Instance.new("Model",game.Players.LocalPlayer.Backpack.Local.CombatMain)
@@ -1016,16 +1011,47 @@ while true do task.wait(0.5)
         if game.Players.LocalPlayer.Backpack.Local:FindFirstChild("Dead") then
             game.Players.LocalPlayer.Backpack.Local.Dead:Destroy()
         end    
-    end)
+    --end)
 end
 end
 end)
 
+Craft:AddTextbox({
+	Name = "Craft Gun/Item",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(item2)
+	    spawn(function()
+		local item = itemsearch(item2)
+		if item then
+		    local originpos = game.Players.LocalPlayer.Character.HumanoidRootPart.Position
+		    task.wait()
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(186.12147521972656, 7.7288360595703125, -113.31971740722656)
+		    task.wait(0.3)
+		    fireproximityprompt(game:GetService("Workspace").WorkBench.MainPart.Attachment.ProximityPrompt)
+		    task.wait(0.2)
+		    game:GetService("ReplicatedStorage").Events.CraftEvent:FireServer(""..item.."")
+		    task.wait(0.5)
+		    game:GetService("Players").LocalPlayer.PlayerGui.HUD.CraftingFrame.Visible = false
+		    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(originpos)
+		else
+		    spawn(function()
+		    notify("Life Sentence Fucker","Gun doesn't exist make sure to spell it correctly (you dont need to type it fully!)")
+		    local vineboom3 = Instance.new("Sound",workspace)
+            vineboom3.SoundId = "rbxassetid://7147484622"
+            vineboom3.Volume = 5
+            vineboom3:Play()
+            task.wait(2)
+            vineboom3:Destroy()
+            end)
+		end
+	    end)
+    end
+})
+
 local killmsg = Instance.new("Message",workspace)
 killmsg.Text = "Thanks for using my script!"
 task.wait(4)
-killmsg.Text = "Btw running this script twice will fuck ur game up"
-task.wait(7)
 killmsg:Destroy()
 
 --end)

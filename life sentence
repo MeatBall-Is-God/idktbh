@@ -1,3 +1,21 @@
+--// Settings \\--
+
+_G.autoFarmScraptog = false -- Auto Farm Scrap (Default: False)
+_G.autoFarmRegisters = false --- Auto Farm Registers/Safes (Default: False)
+_G.antiIllegalRoom = false --- Anti Illegal Room (Default: False)
+_G.autoStomp = false --- Auto Stomp (Default: False)
+_G.antiDeath = false --- Anti Death (Default: False)
+_G.customAntiDeathPos = false --- Anti Death Custom Position (Default: False)
+_G.autoReqMeal = false --- Auto Request Cafeteria Meal (Default: False)
+_G.noSlow = false --- No Melee Slow (Default: False)
+_G.noSlow2 = false --- No Gun Slow (Default: False)
+_G.Vape = false --- Vape (Default: False)
+_G.infEnergy = false --- Inf Energy (Default: False)
+_G.autoReload = false --- Auto Reload FireArm (Default: False)
+_G.silentAim = false --- Silent Aim (Default: False)
+_G.killSay = false --- Kill Say (Default: False)
+_G.killauratog = false --- Kill Aura (Default: False)
+
 if game.PlaceId == 7860844204 then
 
 if game:GetService("Workspace").Camera.CameraType == Enum.CameraType.Custom then
@@ -194,7 +212,7 @@ TextButton.MouseButton1Click:Connect(function()
     
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
---pcall(function()
+pcall(function()
     local assscript = game.Players.LocalPlayer.Backpack.Local:FindFirstChild("CombatMain")
     for i,garbage in next, getgc() do
         if type(garbage) == "function" and getfenv(garbage).script == assscript then
@@ -205,8 +223,10 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
         end
     end
     
+    _G.killaurarange = 5
+    _G.teleportforwardrange = 5
     _G.adeadsum = false
---end)
+end)
 
 --- this was straight up taken from justezpis gui im sorry but this script is meant to be a less laggier remake
 

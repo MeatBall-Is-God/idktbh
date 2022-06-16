@@ -1,7 +1,3 @@
-if _G.ignoreSelf then
-    table.insert(whiteList, tostring(game.Players.LocalPlayer.Character.Name))
-end    
-
 function notification(text)
 	game.StarterGui:SetCore("SendNotification", {
     Title = "This Script";

@@ -25,10 +25,10 @@ end
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
 
-local Window = OrionLib:MakeWindow({Name = "List", HidePremium = false, SaveConfig = true, ConfigFolder = "List"})
+local Window = OrionLib:MakeWindow({Name = "Random Shitty Town Script", HidePremium = false, SaveConfig = true, ConfigFolder = "Random Shitty Town Script"})
 
 local Tab = Window:MakeTab({
-	Name = "WhiteList",
+	Name = "Main",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -88,6 +88,18 @@ Tab:AddTextbox({
         end
 	    end	  
     end
+})
+
+Tab:AddToggle({
+	Name = "Tool Droping",
+	Default = true,
+	Callback = function(ass)
+		if ass then
+		    _G.allowtooldroptroll = true
+		else
+		    _G.allowtooldroptroll = false
+		end 
+	end    
 })
 
 if _G.allowtooldroptroll then

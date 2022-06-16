@@ -1,3 +1,21 @@
+if not _G.allreadygoing then
+_G.allreadygoing = true  
+spawn(function()
+    while _G.allreadygoing do task.wait(0.2) --- i like task.wait() more 🤓🤓🤓
+        pcall(function()
+            if not _G.sometable == _G.list then
+                print("List changed!")
+                _G.sometable = _G.list
+            end   
+        end)
+    end
+end)
+end
+
+if _G.allreadytabled then
+    _G.whiteList = _G.sometable
+end    
+
 if not _G.allreadytabled then
     _G.notcustomtable = true
     _G.allreadytabled = true
@@ -31,28 +49,24 @@ Tab:AddTextbox({
 	Default = "",
 	TextDisappear = true,
 	Callback = function(player1)
-	    local player = playersearch(player1)
-	    if player then
-		if game.Players:FindFirstChild(player) then
-		if table.find(_G.whiteList, tostring(player)) then
+        local player = playersearch(player1)
+        if player and not table.find(_G.whiteList, player) and not table.find(_G.sometable, player) then
+           table.insert(_G.whiteList, tostring(player))
 		   OrionLib:MakeNotification({
-            	Name = "WhiteList",
-            	Content = "Player "..player.." allready added.",
-            	Image = "rbxassetid://4483345998",
-            	Time = 5
-            })
-        else
-            table.insert(_G.whiteList, tostring(player))
-            OrionLib:MakeNotification({
             	Name = "WhiteList",
             	Content = "Added "..player.." to WhiteList table.",
             	Image = "rbxassetid://4483345998",
             	Time = 5
             })
-		end
+        else
+            OrionLib:MakeNotification({
+            	Name = "WhiteList",
+            	Content = "Player "..player.." allready added (or allready whitelisted).",
+            	Image = "rbxassetid://4483345998",
+            	Time = 5
+            })
 		end
 	end
-end
 })
 
 Tab:AddTextbox({
@@ -60,9 +74,9 @@ Tab:AddTextbox({
 	Default = "",
 	TextDisappear = true,
 	Callback = function(player1)
-	    local player = playersearch(player1)
-	    if player then
-		local index = table.find(_G.whiteList, player)
+        local player = playersearch(player1)
+        if player and table.find(_G.whiteList, player) and not table.find(_G.sometable, player) then
+        local index = table.find(_G.whiteList, player)
         if index then
             table.remove(_G.whiteList, index)
             OrionLib:MakeNotification({
@@ -79,7 +93,7 @@ Tab:AddTextbox({
             	Time = 5
             })
         end
-	end	  
+    end
 end
 })
 
@@ -107,9 +121,9 @@ Tab:AddButton({
 	Name = "WhiteList All",
 	Callback = function()
         for i,v in pairs(game.Players:GetPlayers()) do
-            if table.find(_G.whiteList, tostring(v.Character.Name)) then
-            else
-                table.insert(_G.whiteList, tostring(v.Character.Name))
+            if table.find(_G.whiteList, tostring(v)) then
+            else    
+                table.insert(_G.whiteList, tostring(v))
             end
         end    
   	end    
@@ -118,12 +132,7 @@ Tab:AddButton({
 Tab:AddButton({
 	Name = "BlackList All",
 	Callback = function()
-	    spawn(function()
-    	    for i,v in pairs(_G.whiteList) do
-    	        _G.whiteList = {}
-    	    end
-    	end)    
-        pcall(function()
+        _G.whiteList = _G.sometable
             for i,v in pairs(game.Players:GetPlayers()) do
                 if v and v.Character and v.Character:FindFirstChildWhichIsA("Humanoid").Health > 0 and v.Character:FindFirstChildWhichIsA("Tool") then
                     local ohInstance1 = v.Character:FindFirstChildWhichIsA("Tool")
@@ -135,14 +144,13 @@ Tab:AddButton({
                     game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
                 end
             end
-        end)	    
   	end    
 })
 
 Tab:AddButton({
 	Name = "Print WhiteListed People (press F9 to view)",
 	Callback = function()
-	    pcall(function()
+
 	    print()
         warn("--// White Listed People Under \\--")
         for i,v in pairs(_G.whiteList) do
@@ -150,7 +158,7 @@ Tab:AddButton({
         end
         warn("--// White Listed People Above \\--")
         print()
-        end)
+
   	end    
 })
 

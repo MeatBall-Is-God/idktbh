@@ -1,9 +1,5 @@
 local whiteList = {""} --- people who will be whitelisted (CAPITAL MATTER, NOT DISPLAY NAME, FULL NAME, MORE CAN BE ADDED)
 
-if _G.ignoreSelf then
-    table.insert(whiteList, tostring(game.Players.LocalPlayer.Character.Name))
-end  
-
 function notification(text)
 	game.StarterGui:SetCore("SendNotification", {
     Title = "This Script";
@@ -159,6 +155,16 @@ end
 
 game.Workspace.DescendantAdded:Connect(function(c)
     if _G.allowtooldroptroll then
+    	if _G.ignoreSelf then
+        if c:IsA("Tool") and c.Parent:IsA("Model") and game.Players:FindFirstChild(c.Parent.Name) ~= game.Players.LocalPlayer then
+            local ohInstance1 = c
+            local ohString2 = "CanCollide"
+            local ohBoolean3 = true
+            local ohString4 = "par1"
+            local ohVector35 = Vector3.new(0.7717880010604858, -0.16577686369419098, 0.6138903498649597)  --- random position (it will still drop near the player)
+                            
+            game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
+        end   
         if c:IsA("Tool") and c.Parent:IsA("Model") and game.Players:FindFirstChild(c.Parent.Name) and not table.find(whiteList, c.Parent.Name) then
             local ohInstance1 = c
             local ohString2 = "CanCollide"
@@ -168,5 +174,6 @@ game.Workspace.DescendantAdded:Connect(function(c)
                             
             game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
         end    
+    	end
     end
 end) 

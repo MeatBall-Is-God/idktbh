@@ -1,5 +1,11 @@
+local whiteList = {""} --- people who will be whitelisted (CAPITAL MATTER, NOT DISPLAY NAME, FULL NAME, MORE CAN BE ADDED)
+
+if _G.ignoreSelf then
+    table.insert(whiteList, tostring(game.Players.LocalPlayer.Character.Name))
+end  
+
 function notification(text)
-    game.StarterGui:SetCore("SendNotification", {
+	game.StarterGui:SetCore("SendNotification", {
     Title = "This Script";
     Text = text;
     Icon = "rbxassetid://4452245157";

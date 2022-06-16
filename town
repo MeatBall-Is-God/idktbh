@@ -1,0 +1,138 @@
+_G.allowtooldroptroll = true --- set to true if you want it to work, false for it to not work
+_G.ignoreSelf = true --- set this to true if you want the script to ignore you
+
+local whiteList = {""} --- people who will be whitelisted (CAPITAL MATTER, NOT DISPLAY NAME, FULL NAME, MORE CAN BE ADDED)
+
+if _G.ignoreSelf then
+    table.insert(whiteList, tostring(game.Players.LocalPlayer.Character.Name))
+end    
+
+function notification(text)
+	game.StarterGui:SetCore("SendNotification", {
+    Title = "This Script";
+    Text = text;
+    Icon = "rbxassetid://4452245157";
+    Duration = 6;
+    })
+end
+
+function playersearch(arg)
+    local player
+    for i, v in pairs(game:GetService("Players"):GetPlayers()) do 
+        if string.lower(string.sub(v.Name, 1, string.len(arg))) == string.lower(arg) then
+            player = v.Name
+    	end
+	end
+    if player then
+    return player
+    end
+end
+
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+
+local Window = OrionLib:MakeWindow({Name = "List", HidePremium = false, SaveConfig = true, ConfigFolder = "List"})
+
+local Tab = Window:MakeTab({
+	Name = "WhiteList",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+Tab:AddTextbox({
+	Name = "WhiteList",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(player1)
+	    local player = playersearch(player1)
+	    if player then
+		if game.Players:FindFirstChild(player) then
+		if table.find(whiteList, tostring(player)) then
+		   OrionLib:MakeNotification({
+            	Name = "WhiteList",
+            	Content = "Player "..player.." allready added.",
+            	Image = "rbxassetid://4483345998",
+            	Time = 5
+            })
+        else
+            table.insert(whiteList, tostring(player))
+            OrionLib:MakeNotification({
+            	Name = "WhiteList",
+            	Content = "Added "..player.." to WhiteList table.",
+            	Image = "rbxassetid://4483345998",
+            	Time = 5
+            })
+		end
+		end
+    end
+    end
+})
+
+Tab:AddTextbox({
+	Name = "BlackList",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(player1)
+	    local player = playersearch(player1)
+	    if player then
+		local index = table.find(whiteList, player)
+        if index then
+            table.remove(whiteList, index)
+            OrionLib:MakeNotification({
+            	Name = "BlackList",
+            	Content = "Removed "..player.." from WhiteList table.",
+            	Image = "rbxassetid://4483345998",
+            	Time = 5
+            })
+        else
+            OrionLib:MakeNotification({
+            	Name = "BlackList",
+            	Content = "Player "..player.." is allready BlackListed (or not found).",
+            	Image = "rbxassetid://4483345998",
+            	Time = 5
+            })
+        end
+	    end	  
+    end
+})
+
+if _G.allowtooldroptroll then
+pcall(function()
+    for i,v in pairs(game.Players:GetPlayers()) do
+        if v and v.Character and v.Character:FindFirstChildWhichIsA("Humanoid").Health > 0 and v.Character:FindFirstChildWhichIsA("Tool") then
+            if _G.ignoreSelf then
+                if v ~= game.Players.LocalPlayer then
+                    local ohInstance1 = v.Character:FindFirstChildWhichIsA("Tool")
+                    local ohString2 = "CanCollide"
+                    local ohBoolean3 = true
+                    local ohString4 = "par1"
+                    local ohVector35 = Vector3.new(0.7717880010604858, -0.16577686369419098, 0.6138903498649597)  --- random position (it will still drop near the player)
+                        
+                    game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
+                end
+            else
+                local ohInstance1 = v.Character:FindFirstChildWhichIsA("Tool")
+                local ohString2 = "CanCollide"
+                local ohBoolean3 = true
+                local ohString4 = "par1"
+                local ohVector35 = Vector3.new(0.7717880010604858, -0.16577686369419098, 0.6138903498649597) --- random position (it will still drop near the player)
+                        
+                game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
+            end        
+        end
+    end
+end)
+end
+
+game.Workspace.DescendantAdded:Connect(function(c)
+    if _G.allowtooldroptroll then
+        if c:IsA("Tool") and c.Parent:IsA("Model") and game.Players:FindFirstChild(c.Parent.Name) and not table.find(whiteList, c.Parent.Name) then
+            local ohInstance1 = c
+            local ohString2 = "CanCollide"
+            local ohBoolean3 = true
+            local ohString4 = "par1"
+            local ohVector35 = Vector3.new(0.7717880010604858, -0.16577686369419098, 0.6138903498649597)  --- random position (it will still drop near the player)
+                            
+            game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
+        end    
+    end
+end) 

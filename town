@@ -1,6 +1,7 @@
 _G.originalTable = _G.whiteList
 
 if not _G.allreadytabled then
+    _G.notcustomtable = true
     _G.allreadytabled = true
     _G.whiteList = {}
 end    
@@ -143,6 +144,7 @@ Tab:AddButton({
 Tab:AddButton({
 	Name = "Print WhiteListed People (press F9 to view)",
 	Callback = function()
+	    pcall(function()
 	    print()
         warn("--// White Listed People Under \\--")
         for i,v in pairs(_G.whiteList) do
@@ -150,8 +152,33 @@ Tab:AddButton({
         end
         warn("--// White Listed People Above \\--")
         print()
+        end)
   	end    
 })
+
+if not _G.notcustomtable then
+
+Tab:AddButton({
+	Name = "Original WhiteList Table",
+	Callback = function()
+	    _G.whiteList = _G.originalTable
+        pcall(function()
+            for i,v in pairs(game.Players:GetPlayers()) do
+                if v and v.Character and v.Character:FindFirstChildWhichIsA("Humanoid").Health > 0 and v.Character:FindFirstChildWhichIsA("Tool") then
+                    local ohInstance1 = v.Character:FindFirstChildWhichIsA("Tool")
+                    local ohString2 = "CanCollide"
+                    local ohBoolean3 = true
+                    local ohString4 = "par1"
+                    local ohVector35 = Vector3.new(0.7717880010604858, -0.16577686369419098, 0.6138903498649597) --- random position (it will still drop near the player)
+                                    
+                    game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
+                end
+            end
+        end)	    
+  	end    
+})   
+
+end
 
 Tab:AddToggle({
 	Name = "Tool Droping",

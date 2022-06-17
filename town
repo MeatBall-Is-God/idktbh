@@ -26,7 +26,19 @@ local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shl
 local Window = OrionLib:MakeWindow({Name = "Random Shitty Town Script", HidePremium = false, SaveConfig = true, ConfigFolder = "Random Shitty Town Script"})
 
 local Tab = Window:MakeTab({
-	Name = "Main",
+	Name = "WhiteListing Stuff",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Tab2 = Window:MakeTab({
+	Name = "Drone shit",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Tab3 = Window:MakeTab({
+	Name = "Misc.",
 	Icon = "rbxassetid://4483345998",
 	PremiumOnly = false
 })
@@ -66,6 +78,19 @@ Tab:AddTextbox({
         local index = table.find(_G.whiteList, player)
         if index then
             table.remove(_G.whiteList, index)
+                pcall(function()
+                for i,v in pairs(game.Players:GetPlayers()) do
+                    if v and v.Character and v.Character:FindFirstChildWhichIsA("Humanoid").Health > 0 and v.Character:FindFirstChildWhichIsA("Tool") then
+                            local ohInstance1 = v.Character:FindFirstChildWhichIsA("Tool")
+                            local ohString2 = "CanCollide"
+                            local ohBoolean3 = true
+                            local ohString4 = "par1"
+                            local ohVector35 = Vector3.new(0.7717880010604858, -0.16577686369419098, 0.6138903498649597) --- random position (it will still drop near the player)
+                                    
+                            game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
+                        end        
+                    end
+                end)            
             OrionLib:MakeNotification({
             	Name = "BlackList",
             	Content = "Removed "..player.." from WhiteList table.",
@@ -100,6 +125,19 @@ Tab:AddButton({
         local index = table.find(_G.whiteList, game.Players.LocalPlayer.Character.Name)
         if index then
             table.remove(_G.whiteList, index)
+                pcall(function()
+                for i,v in pairs(game.Players:GetPlayers()) do
+                    if v and v.Character and v.Character:FindFirstChildWhichIsA("Humanoid").Health > 0 and v.Character:FindFirstChildWhichIsA("Tool") then
+                            local ohInstance1 = v.Character:FindFirstChildWhichIsA("Tool")
+                            local ohString2 = "CanCollide"
+                            local ohBoolean3 = true
+                            local ohString4 = "par1"
+                            local ohVector35 = Vector3.new(0.7717880010604858, -0.16577686369419098, 0.6138903498649597) --- random position (it will still drop near the player)
+                                    
+                            game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
+                        end        
+                    end
+                end) 
         end
   	end    
 })
@@ -173,6 +211,257 @@ Tab:AddToggle({
 		end 
 	end    
 })
+
+Tab2:AddButton({
+	Name = "Kill all (drone)",
+	Callback = function()
+        local Plr = game:GetService("Players").LocalPlayer
+        local Mouse = Plr:GetMouse()
+        if game.Players.LocalPlayer.Character:FindFirstChild("Laptop") and game.Players.LocalPlayer.Character:FindFirstChild("DroneModel") and game.Players.LocalPlayer.Character:FindFirstChild("DroneModel"):FindFirstChild("Torso"):FindFirstChild("BodyPosition") then
+        for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+                if v ~= Plr and not table.find(_G.whiteList, v) then
+                    task.wait(0.1)
+                    Plr.Character.DroneModel.Torso.BodyPosition.Position = v.Character.Torso.Position
+                    task.wait(0.1)
+                    Plr.Character.Laptop.Remotes.UserEvent:FireServer("shoot", v.Character.Torso, v.Character.Torso.Position, 9e9, Enum.NormalId.Back)
+                end
+            end
+        else
+         OrionLib:MakeNotification({
+            	Name = "Kill all (drone)",
+            	Content = "Spawn in a drone (!spawn laptop)",
+            	Image = "rbxassetid://4483345998",
+            	Time = 5
+            })
+        end
+  	end    
+})
+
+Tab2:AddTextbox({
+	Name = "Follow player (drone)",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(acc)
+	    _G.runin = false
+        local PlayerName = playersearch(acc)
+        local Plr = game.Players:FindFirstChild(PlayerName)
+        
+        if not table.find(_G.whiteList, Plr) then
+        _G.runin = true
+        while _G.runin do task.wait()
+            if game.Players.LocalPlayer.Character:FindFirstChild("Laptop") and game.Players.LocalPlayer.Character:FindFirstChild("DroneModel") and game.Players.LocalPlayer.Character:FindFirstChild("DroneModel"):FindFirstChild("Torso"):FindFirstChild("BodyPosition") then
+                game.Players.LocalPlayer.Character.DroneModel.Torso.BodyPosition.Position = Plr.Character.Head.Position
+            else
+         _G.runin = false
+         OrionLib:MakeNotification({
+            	Name = "Follow player (drone)",
+            	Content = "Spawn in a drone (!spawn laptop)",
+            	Image = "rbxassetid://4483345998",
+            	Time = 5
+            })
+        end
+        end
+        end 
+    end
+})
+
+Tab2:AddToggle({
+	Name = "Spam alarm (drone)",
+	Default = false,
+	Callback = function(ass)
+		if ass then
+		   _G.dronepinger = true
+		else
+		    _G.dronepinger = false
+		end
+		while _G.dronepinger do task.wait()
+		    if _G.dronepinger then
+		        if game.Players.LocalPlayer.Character:FindFirstChild("Laptop") and game.Players.LocalPlayer.Character:FindFirstChild("DroneModel") and game.Players.LocalPlayer.Character:FindFirstChild("DroneModel"):FindFirstChild("Torso"):FindFirstChild("BodyPosition") then
+		        local ohString1 = "ping"
+                local ohString2 = "Alarm"
+                game.Players.LocalPlayer.Character.Laptop.Remotes.UserEvent:FireServer(ohString1, ohString2)
+		    end
+        end    
+		end  
+    end
+})
+
+Tab3:AddToggle({
+	Name = "Gun Steal",
+	Default = false,
+	Callback = function(ass)
+		if ass then
+		    _G.allowgunsteal = true
+		    OrionLib:MakeNotification({
+            	Name = "Gun Steal",
+            	Content = "Hold Left Control then click on someone whos holding a gun",
+            	Image = "rbxassetid://4483345998",
+            	Time = 5
+            })
+        else
+            _G.allowgunsteal = false
+		end
+    end
+})
+
+Tab3:AddButton({
+	Name = "FullBright",
+	Callback = function()
+        if not _G.FullBrightExecuted then
+
+	_G.FullBrightEnabled = false
+
+	_G.NormalLightingSettings = {
+		Brightness = game:GetService("Lighting").Brightness,
+		ClockTime = game:GetService("Lighting").ClockTime,
+		FogEnd = game:GetService("Lighting").FogEnd,
+		GlobalShadows = game:GetService("Lighting").GlobalShadows,
+		Ambient = game:GetService("Lighting").Ambient
+	}
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("Brightness"):Connect(function()
+		if game:GetService("Lighting").Brightness ~= 1 and game:GetService("Lighting").Brightness ~= _G.NormalLightingSettings.Brightness then
+			_G.NormalLightingSettings.Brightness = game:GetService("Lighting").Brightness
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").Brightness = 1
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("ClockTime"):Connect(function()
+		if game:GetService("Lighting").ClockTime ~= 12 and game:GetService("Lighting").ClockTime ~= _G.NormalLightingSettings.ClockTime then
+			_G.NormalLightingSettings.ClockTime = game:GetService("Lighting").ClockTime
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").ClockTime = 12
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("FogEnd"):Connect(function()
+		if game:GetService("Lighting").FogEnd ~= 786543 and game:GetService("Lighting").FogEnd ~= _G.NormalLightingSettings.FogEnd then
+			_G.NormalLightingSettings.FogEnd = game:GetService("Lighting").FogEnd
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").FogEnd = 786543
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("GlobalShadows"):Connect(function()
+		if game:GetService("Lighting").GlobalShadows ~= false and game:GetService("Lighting").GlobalShadows ~= _G.NormalLightingSettings.GlobalShadows then
+			_G.NormalLightingSettings.GlobalShadows = game:GetService("Lighting").GlobalShadows
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").GlobalShadows = false
+		end
+	end)
+
+	game:GetService("Lighting"):GetPropertyChangedSignal("Ambient"):Connect(function()
+		if game:GetService("Lighting").Ambient ~= Color3.fromRGB(178, 178, 178) and game:GetService("Lighting").Ambient ~= _G.NormalLightingSettings.Ambient then
+			_G.NormalLightingSettings.Ambient = game:GetService("Lighting").Ambient
+			if not _G.FullBrightEnabled then
+				repeat
+					wait()
+				until _G.FullBrightEnabled
+			end
+			game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+		end
+	end)
+
+	game:GetService("Lighting").Brightness = 1
+	game:GetService("Lighting").ClockTime = 12
+	game:GetService("Lighting").FogEnd = 786543
+	game:GetService("Lighting").GlobalShadows = false
+	game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+
+	local LatestValue = true
+	spawn(function()
+		repeat
+			wait()
+		until _G.FullBrightEnabled
+		while wait() do
+			if _G.FullBrightEnabled ~= LatestValue then
+				if not _G.FullBrightEnabled then
+					game:GetService("Lighting").Brightness = _G.NormalLightingSettings.Brightness
+					game:GetService("Lighting").ClockTime = _G.NormalLightingSettings.ClockTime
+					game:GetService("Lighting").FogEnd = _G.NormalLightingSettings.FogEnd
+					game:GetService("Lighting").GlobalShadows = _G.NormalLightingSettings.GlobalShadows
+					game:GetService("Lighting").Ambient = _G.NormalLightingSettings.Ambient
+				else
+					game:GetService("Lighting").Brightness = 1
+					game:GetService("Lighting").ClockTime = 12
+					game:GetService("Lighting").FogEnd = 786543
+					game:GetService("Lighting").GlobalShadows = false
+					game:GetService("Lighting").Ambient = Color3.fromRGB(178, 178, 178)
+				end
+				LatestValue = not LatestValue
+			end
+		end
+	end)
+end
+
+_G.FullBrightExecuted = true
+_G.FullBrightEnabled = not _G.FullBrightEnabled
+  	end    
+})
+
+spawn(function()
+local Plr = game:GetService("Players").LocalPlayer
+local Mouse = Plr:GetMouse()
+function drop(player)
+    if player.Character:FindFirstChildWhichIsA("Tool") then
+    local ohInstance1 = player.Character:FindFirstChildWhichIsA("Tool")
+                local ohString2 = "CanCollide"
+                local ohBoolean3 = true
+                local ohString4 = "par1"
+                local ohVector35 = Vector3.new(0.7717880010604858, -0.16577686369419098, 0.6138903498649597) --- random position (it will still drop near the player)
+                            
+                game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(ohInstance1, ohString2, ohBoolean3, ohString4, ohVector35)
+                ohInstance1.HandleP.CFrame = Plr.Character.HumanoidRootPart.CFrame
+                return ohInstance1
+end
+end
+
+function grab(player)
+    local d = drop(player)
+    local startframce = Plr.Character:WaitForChild("HumanoidRootPart").CFrame
+    Plr.Character:WaitForChild("HumanoidRootPart").CFrame = d.HandleP.CFrame
+    spawn(function()
+       repeat
+               local ohString2 = "CanCollide"
+local ohBoolean3 = false
+local ohString4 = "par4"
+
+           d.HandleP.CFrame = Plr.Character:WaitForChild("HumanoidRootPart").CFrame
+           game:GetService("ReplicatedStorage").InteractFunction:InvokeServer(d, ohString2, ohBoolean3, ohString4)
+           task.wait()
+        until d.Parent ~= game:GetService("Workspace")
+    end)
+end
+
+
+
+Mouse.Button1Down:connect(function()
+if not game:GetService("UserInputService"):IsKeyDown(Enum.KeyCode.LeftControl) then return end
+if not Mouse.Target then return end
+if game:GetService("Players"):GetPlayerFromCharacter(Mouse.Target.Parent) then
+    if _G.allowgunsteal then
+        grab(game:GetService("Players"):GetPlayerFromCharacter(Mouse.Target.Parent))
+    end    
+end
+end)
+end)
 
 if _G.allowtooldroptroll then
 pcall(function()

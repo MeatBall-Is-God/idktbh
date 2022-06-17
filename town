@@ -1,20 +1,7 @@
-if not _G.allreadygoing then
-_G.allreadygoing = true  
-spawn(function()
-    while _G.allreadygoing do task.wait(0.2) --- i like task.wait() more 🤓🤓🤓
-        pcall(function()
-            if not _G.sometable == _G.list then
-                print("List changed!")
-                _G.sometable = _G.list
-            end   
-        end)
-    end
-end)
-end
-
 if _G.allreadytabled then
-    _G.whiteList = _G.sometable
-end    
+repeat task.wait() until _G.sometable ~= nil
+_G.whiteList = _G.sometable
+end
 
 if not _G.allreadytabled then
     _G.notcustomtable = true
@@ -164,7 +151,7 @@ Tab:AddButton({
 
 Tab:AddToggle({
 	Name = "Tool Droping",
-	Default = true,
+	Default = false,
 	Callback = function(ass)
 		if ass then
 		    pcall(function()

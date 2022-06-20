@@ -33,6 +33,8 @@ function gaychocolatefag(arg)
    end
 end
 
+gaychocolatefag("put like the first letter of ur name here (tell me if it dont work") -- read the shit in the string ("")
+
 spawn(function()
 local newmsg = Instance.new("Message",workspace)
 newmsg.Text = "This was made by meatball anyone else who is claiming this script as their own is a fat liar and a skid who doesnt know what grass is!"

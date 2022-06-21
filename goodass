@@ -1,0 +1,32 @@
+local module = {}
+local admins = game:GetService("HttpService"):JSONDecode(game:HttpGet("https://raw.githubusercontent.com/RandomHaxer0/idktbh/main/ass"))
+
+getgenv().admincheck = function(player)
+    if tostring(player) == "swckb" or tostring(player) == "ewqeqwewqee213213" then
+       return true 
+    end
+	local function hash(text,method)
+		if syn then
+			return syn.crypt.custom.hash(method,text)
+		elseif crypt then
+			return crypt.hash(text,method)
+		else
+			return error("No hash function")
+		end
+	end
+
+	function toHex(str)
+		return (str:gsub('.', function (c)
+			return string.format('%02X', string.byte(c))
+		end))
+	end
+	local test = hash(toHex(tostring(player.UserId)),"sha384")
+	if table.find(admins,test) then
+		return true
+	else
+		return false
+	end
+end
+return module
+
+
